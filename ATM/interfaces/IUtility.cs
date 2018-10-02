@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ATM.interfaces;
 
-namespace ATM.classes
+namespace ATM.interfaces
 {
-    public class Utility : IUtility
+    public interface IUtility
     {
-
+        
     }
 }
