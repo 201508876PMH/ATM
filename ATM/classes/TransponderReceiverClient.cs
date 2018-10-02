@@ -29,7 +29,7 @@ namespace ATM.classes
             Console.Clear();
             Console.WriteLine("Received transponder data:");
 
-            /*_decoder.UpdateTransponderData(args.TransponderData);
+            /*_decoder.UpdateTransponderData(e.TransponderData);
 
             _analyser.AnalyseData(_decoder._Aircrafts);
 
