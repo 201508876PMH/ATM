@@ -1,33 +1,44 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using ATM.interfaces;
 using TransponderReceiver;
 
 namespace ATM.classes
 {
-    class TransponderReceiverClient
+    public class TransponderReceiverClient
     {
-        private ITransponderReceiver receiver;
+        private ITransponderReceiver _receiver;
+        private IAnalyser _analyser;
+        private IDecoder _decoder;
 
-        // Using constructor injection for dependency/ies
-        public TransponderReceiverClient(ITransponderReceiver receiver)
+        // Using constructor injection
+        public TransponderReceiverClient(ITransponderReceiver receiver, IAnalyser analyser, IDecoder decoder)
         {
-            // This will store the real or the fake transponder data receiver
-            this.receiver = receiver;
+            // set Interface fields // Fakes or real
+            _receiver = receiver;
+            _analyser = analyser;
+            _decoder = decoder;
+
 
             // Attach to the event of the real or the fake TDR
-            this.receiver.TransponderDataReady += ReceiverOnTransponderDataReady;
+            _receiver.TransponderDataReady += ReceiverOnTransponderDataReady;
         }
 
         private void ReceiverOnTransponderDataReady(object sender, RawTransponderDataEventArgs e)
         {
-            // Just display data
-            foreach (var data in e.TransponderData)
+            // Decode data
+            Console.Clear();
+            Console.WriteLine("Received transponder data:");
+
+            /*_decoder.UpdateTransponderData(args.TransponderData);
+
+            _analyser.AnalyseData(_decoder._Aircrafts);
+
+            foreach (var item in analyser._FilteredAircrafts)
             {
-                System.Console.WriteLine($"Transponderdata {data}");
+                Console.WriteLine(item.ToString());
             }
+            */
+            //_decoder.
         }
         
     }
