@@ -11,8 +11,8 @@ namespace ATM.classes
     {
         public int CalcDistance(AircraftData obj1, AircraftData obj2)
         {
-            return (int)Math.Sqrt(Math.Pow((obj2.X_coordinate - obj1.X_coordinate), 2) +
-                                  Math.Pow((obj2.Y_coordinate - obj1.Y_coordinate), 2));
+            return (int)Math.Sqrt(Math.Pow(((double)obj2.X_coordinate - (double)obj1.X_coordinate), 2) +
+                                  Math.Pow(((double)obj2.Y_coordinate - (double)obj1.Y_coordinate), 2));
         }
 
         public int ConvertTimeToMilliseconds(AircraftData obj)
