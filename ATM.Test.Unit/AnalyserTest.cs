@@ -15,13 +15,13 @@ namespace ATM.Test.Unit
     public class AnalyserTest
     {
         private Analyser _uut;
-        private IDecoder _decoder;
+        private IUtility _utility;
 
         [SetUp]
         public void Setup()
         {
-            _uut = new Analyser();
-            _decoder = Substitute.For<IDecoder>();
+            _utility = Substitute.For<IUtility>();
+            _uut = new Analyser(_utility);
         }
 
         [Test]
@@ -34,26 +34,11 @@ namespace ATM.Test.Unit
             FakeAircrafts.Add(new AircraftData("BXX794", 60000, 95000, 7000, new TimeStamp(2018, 10, 2, 14, 0, 0, 0)));
             FakeAircrafts.Add(new AircraftData("XMW494", 60000, 40000, 300, new TimeStamp(2018, 10, 2, 14, 0, 0, 0)));
             FakeAircrafts.Add(new AircraftData("XRM294", 1000, 95000, 300, new TimeStamp(2018, 10, 2, 14, 0, 0, 0)));
+            FakeAircrafts.Add(new AircraftData("TEE666", 10000, 90000, 500, new TimeStamp(2018, 10, 2, 14, 0, 0, 0)));
 
             _uut.FilterAircrafts(FakeAircrafts);
 
-            Assert.That(_uut._FilteredAircrafts.IsNullOrEmpty());
-
-            /*
-            _uv.ValidateEntryRequest("1234").Returns(true);
-
-            _uut.RequestEntry("1234");
-
-            _uv.Received().ValidateEntryRequest("1234");
-
-            _d.Received().Open();
-            _en.Received().NotifyEntryGranted();
-
-            _uut.DoorClosed(); //Ikke muligt at lukke døren
-            _uut.DoorOpened();
-
-            _d.Received().Close();
-            */
+            Assert.That(_uut._FilteredAircrafts[0].Tag == "TEE666" && _uut._FilteredAircrafts.Count() == 1);
         }
     }
 }
