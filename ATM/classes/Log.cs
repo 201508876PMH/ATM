@@ -4,12 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ATM.Test.Unit
+namespace ATM.classes
 {
-    public class ATMTest
+    class Log
     {
-       
-        //test
-
     }
 }
