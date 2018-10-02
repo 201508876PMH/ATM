@@ -4,14 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ATM.classes
+namespace ATM.interfaces
 {
-    public interface IAnalyser
-    {
-
-    }
-
-    public class Analyser
+    interface IDecoder
     {
 
     }

@@ -59,16 +59,19 @@
     <Reference Include="System.Xml" />
     <Reference Include="TransponderReceiver, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\ATM Part1\Air_Traffic_Monitoring_Part_1\TransponderReceiver.dll</HintPath>
+      <HintPath>..\..\Air_Traffic_Monitoring_Part_1\TransponderReceiver.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="classes\AircraftData.cs" />
     <Compile Include="classes\Analyser.cs" />
     <Compile Include="classes\Decoder.cs" />
     <Compile Include="classes\Log.cs" />
     <Compile Include="classes\Program.cs" />
+    <Compile Include="classes\TimeStamp.cs" />
     <Compile Include="classes\TransponderReceiverClient.cs" />
     <Compile Include="classes\Utility.cs" />
+    <Compile Include="interfaces\IDecoder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
