@@ -12,7 +12,7 @@ using NSubstitute;
 namespace ATM.Test.Unit
 {
     [TestFixture]
-    public class ATMTest
+    public class AnalyserTest
     {
         private Analyser _uut;
         private IDecoder _decoder;
