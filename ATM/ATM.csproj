@@ -69,6 +69,7 @@
     <Compile Include="classes\Program.cs" />
     <Compile Include="classes\TransponderReceiverClient.cs" />
     <Compile Include="classes\Utility.cs" />
+    <Compile Include="interfaces\IDecoder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
