@@ -3,11 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ATM.classes;
 
 namespace ATM.interfaces
 {
     public interface IDecoder
     {
+        // A method for cloning, from one list to another
+        // We create this method because a deep clone funktion isnt availible for lists
+        List<AircraftData> CloneList(List<AircraftData> _list);
+
+        // A method for updating our lists, both old and new
+        // We first clone the objects from TrasnponderData to a 'old' list
+        void UpdateTransponderData(List<string> _TransponderData);
+
+        // A method for for 'snipping' the received string from aircrafts into substrings.
+        AircraftData DecodeString(string data);
+
+        // A method for inserting speed. This method takes to lists as argument, reasoned
+        // it inserts the speed 
+        void InsertSpeed(List<AircraftData> oList, List<AircraftData> nList);
 
     }
 }
