@@ -33,7 +33,4 @@ namespace ATM.Test.Unit
         public 
 
     }
-
-    
-
 }
