@@ -60,6 +60,7 @@
     <Compile Include="AnalyserTest.cs" />
     <Compile Include="DecoderTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UtillityTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ATM\ATM.csproj">

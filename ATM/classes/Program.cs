@@ -21,7 +21,7 @@ namespace ATM
 
 
             // Dependency injection with the real TDR
-            TransponderReceiverClient system = new TransponderReceiverClient(receiver, new Analyser(), decoder);
+            TransponderReceiverClient system = new TransponderReceiverClient(receiver, analyser, decoder);
 
             // Let the real TDR execute in the background
             while (true)
