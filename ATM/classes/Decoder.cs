@@ -10,10 +10,13 @@ namespace ATM.classes
 {
     public class Decoder : IDecoder
     {
-        public Decoder()
+        private IUtility _utility;
+
+        public Decoder(IUtility utility)
         {
             _Aircrafts = new List<AircraftData>();
             _OldAircraftDatas = new List<AircraftData>();
+            _utility = utility;
         }
 
 
@@ -83,7 +86,7 @@ namespace ATM.classes
 
                 foreach (var item in nList)
                 {
-                    item.Speed = Utility.Speed(item, oList[i]);
+                    item.Speed = _utility.Speed(item, oList[i]);
                     ++i;
                 }
             }
@@ -91,14 +94,14 @@ namespace ATM.classes
             {
                 for (int j = 0; j < nList.Count(); j++)
                 {
-                    nList[j].Speed = Utility.Speed(nList[j], oList[j]);
+                    nList[j].Speed = _utility.Speed(nList[j], oList[j]);
                 }
             }
             else
             {
                 for (int j = 0; j < oList.Count(); j++)
                 {
-                    nList[j].Speed = Utility.Speed(nList[j], oList[j]);
+                    nList[j].Speed = _utility.Speed(nList[j], oList[j]);
                 }
             }
         }
