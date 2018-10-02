@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ATM.classes;
 
 namespace ATM.interfaces
 {
-    public interface IDecoder
+    public interface IAnalyser
     {
-
+        void FilterAircrafts(List<AircraftData> _list);
     }
 }
