@@ -9,9 +9,12 @@ namespace ATM.classes
 {
     public class Analyser : IAnalyser
     {
-        public Analyser()
+        private IUtility _utility;
+
+        public Analyser(IUtility utility)
         {
             _FilteredAircrafts = new List<AircraftData>();
+            _utility = utility;
         }
 
         public void FilterAircrafts(List<AircraftData> _list)
@@ -28,6 +31,25 @@ namespace ATM.classes
                 }
             }
         }
+
+        private bool CheckForCollision(AircraftData obj1, AircraftData obj2)
+        {
+            /*if (obj1 == obj2)
+            {
+                return false;
+            }*/
+
+            int AltDiff = Math.Abs(obj1.Altitude - obj2.Altitude);
+            int Dist = _utility.CalcDistance(obj1, obj2);
+
+            if (AltDiff <= 300 && Dist <= 5000)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
         public List<AircraftData> _FilteredAircrafts;
     }
 }
