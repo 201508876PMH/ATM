@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ATM.interfaces;
 using TransponderReceiver;
 
 namespace ATM.classes
 {
-    class Decoder
+    public class Decoder : IDecoder
     {
         public Decoder()
         {
@@ -24,7 +25,7 @@ namespace ATM.classes
 
         // A method for cloning, from one list to another
         // We create this method because a deep clone funktion isnt availible for lists
-        private List<AircraftData> CloneList(List<AircraftData> _list)
+        public List<AircraftData> CloneList(List<AircraftData> _list)
         {
             List<AircraftData> newList = new List<AircraftData>();
 
@@ -72,7 +73,7 @@ namespace ATM.classes
 
         // A method for inserting speed. This method takes to lists as argument, reasoned
         // it inserts the speed 
-        private void InsertSpeed(List<AircraftData> oList, List<AircraftData> nList)
+        public void InsertSpeed(List<AircraftData> oList, List<AircraftData> nList)
         {
             int i = 0;
 
