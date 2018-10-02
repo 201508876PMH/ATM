@@ -32,13 +32,8 @@ namespace ATM.classes
             }
         }
 
-        private bool CheckForCollision(AircraftData obj1, AircraftData obj2)
-        {
-            /*if (obj1 == obj2)
-            {
-                return false;
-            }*/
-
+        public bool CheckForCollision(AircraftData obj1, AircraftData obj2)
+        { 
             int AltDiff = Math.Abs(obj1.Altitude - obj2.Altitude);
             int Dist = _utility.CalcDistance(obj1, obj2);
 

@@ -10,5 +10,6 @@ namespace ATM.interfaces
     public interface IAnalyser
     {
         void FilterAircrafts(List<AircraftData> _list);
+        bool CheckForCollision(AircraftData obj1, AircraftData obj2);
     }
 }
