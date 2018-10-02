@@ -53,5 +53,17 @@ namespace ATM.Test.Unit
             
             Assert.That(_uut.CheckForCollision(a1, a2) == Collision);
         }
+
+        [Test]
+        public void Test_AnalyseData()
+        {
+            List<AircraftData> FakeAircrafts = new List<AircraftData>();
+
+            AircraftData a1 = new AircraftData("Plane1", 0, 0, 0, null);
+            AircraftData a2 = new AircraftData("Plane2", 0, 0, 0, null);
+            AircraftData a3 = new AircraftData("Plane3", 0, 0, 0, null);
+
+
+        }
     }
 }
