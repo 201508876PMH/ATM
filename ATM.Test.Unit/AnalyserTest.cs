@@ -40,5 +40,18 @@ namespace ATM.Test.Unit
 
             Assert.That(_uut._FilteredAircrafts[0].Tag == "TEE666" && _uut._FilteredAircrafts.Count() == 1);
         }
+
+        [TestCase(10000, 9800, 4000, true)]
+        [TestCase(10000, 9800, 6000, false)]
+        [TestCase(10000, 6000, 4000, false)]
+        public void Test_CheckForCollisionIsTrue(int Alt1, int Alt2, int Dist, bool Collision)
+        {
+            AircraftData a1 = new AircraftData("", 0, 0, Alt1, null);
+            AircraftData a2 = new AircraftData("", 0, 0, Alt2, null);
+
+            _utility.CalcDistance(a1, a2).Returns(Dist);
+            
+            Assert.That(_uut.CheckForCollision(a1, a2) == Collision);
+        }
     }
 }
