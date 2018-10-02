@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace ATM.classes
 {
-    class Analyser
+    public interface IAnalyser
     {
+
+    }
+
+    public class Analyser
+    {
+
     }
 }
