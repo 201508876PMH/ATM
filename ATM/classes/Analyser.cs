@@ -3,17 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ATM.interfaces;
 
 namespace ATM.classes
 {
-    public class Analyser
+    public class Analyser : IAnalyser
     {
         public Analyser()
         {
             _FilteredAircrafts = new List<AircraftData>();
         }
 
-        private void FilterAircrafts(List<AircraftData> _list)
+        public void FilterAircrafts(List<AircraftData> _list)
         {
             List<AircraftData> FilteredAircrafts = new List<AircraftData>();
 
@@ -27,7 +28,6 @@ namespace ATM.classes
                 }
             }
         }
-
         public List<AircraftData> _FilteredAircrafts;
     }
 }
