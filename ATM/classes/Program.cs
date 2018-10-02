@@ -17,7 +17,7 @@ namespace ATM
             // Using the real transponder data receiver
             ITransponderReceiver receiver = TransponderReceiverFactory.CreateTransponderDataReceiver();
             IAnalyser analyser = new Analyser();
-            IDecoder decoder = new Decoder();
+            IDecoder decoder = new classes.Decoder(new Utility());
 
 
             // Dependency injection with the real TDR

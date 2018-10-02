@@ -11,17 +11,24 @@ namespace ATM.classes
     {
         public int CalcDistance(AircraftData obj1, AircraftData obj2)
         {
-            throw new NotImplementedException();
+            return (int)Math.Sqrt(Math.Pow((obj2.X_coordinate - obj1.X_coordinate), 2) +
+                                  Math.Pow((obj2.Y_coordinate - obj1.Y_coordinate), 2));
         }
 
         public int ConvertTimeToMilliseconds(AircraftData obj)
         {
-            throw new NotImplementedException();
+            int hour = obj.TimeStamp.hour * 60 * 60 * 1000;
+            int minut = obj.TimeStamp.min * 60 * 1000;
+            int sec = obj.TimeStamp.sec * 1000;
+
+            return hour + minut + sec + obj.TimeStamp.ms;
         }
 
         public double Speed(AircraftData newPosition, AircraftData oldPosition)
         {
-            throw new NotImplementedException();
+            int timeDiff = Math.Abs(ConvertTimeToMilliseconds(newPosition) - ConvertTimeToMilliseconds(oldPosition));
+
+            return CalcDistance(newPosition, oldPosition) / ((double)timeDiff / 1000);
         }
     }
 }
