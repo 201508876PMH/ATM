@@ -10,11 +10,13 @@ namespace ATM.classes
     public class Analyser : IAnalyser
     {
         private IUtility _utility;
+        private ILog _log;
 
-        public Analyser(IUtility utility)
+        public Analyser(IUtility utility, ILog log)
         {
             _FilteredAircrafts = new List<AircraftData>();
             _utility = utility;
+            _log = log;
         }
 
         public void FilterAircrafts(List<AircraftData> _list)
@@ -59,6 +61,8 @@ namespace ATM.classes
                         Console.WriteLine($"WARNING! Possible collision between flight {_FilteredAircrafts[i].Tag} " +
                                           $"and {_FilteredAircrafts[j].Tag}.");
                         Console.ResetColor();
+
+                        _log.LogSeperationEvent(_FilteredAircrafts[i], _FilteredAircrafts[j]);
                     }
                 }
             }
