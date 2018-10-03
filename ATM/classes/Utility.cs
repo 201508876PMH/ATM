@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ATM.interfaces;
+using NSubstitute.Routing.Handlers;
 
 namespace ATM.classes
 {
@@ -28,7 +29,55 @@ namespace ATM.classes
         {
             int timeDiff = Math.Abs(ConvertTimeToMilliseconds(newPosition) - ConvertTimeToMilliseconds(oldPosition));
 
-            return CalcDistance(newPosition, oldPosition) / ((double)timeDiff / 1000);
+            return CalcDistance(newPosition, oldPosition)/((double)timeDiff / 1000);
         }
+
+
+
+        public double CalculateDegree(AircraftData newPosition, AircraftData oldPosition)
+        {
+
+            double vektorX = newPosition.X_coordinate - oldPosition.X_coordinate;
+            double vektorY = newPosition.Y_coordinate - oldPosition.Y_coordinate;
+
+
+            double angel = (Math.Atan(vektorY/vektorX) *( 180 / Math.PI));
+
+            if (vektorX < 0)
+            {
+                angel += 180-90;
+            }
+            else if (vektorY < 0)
+            {
+                angel += 360-90;
+            }
+            else
+            {
+                if ((angel -90)<0)
+                {
+                    angel += 360-90;
+                }
+                else
+                {
+                    angel -= 90;
+                }
+            }
+            /*
+            if (angel - 90 < 0)
+            {
+                return angel - 90 + 360;
+            }
+            else
+            {
+                return angel - 90;
+            }
+            */
+            
+
+            return angel;
+
+
+        }
+        
     }
 }
