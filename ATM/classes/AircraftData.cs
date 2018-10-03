@@ -29,7 +29,8 @@ namespace ATM.classes
 
         public override string ToString()
         {
-            return string.Format($"Tag: {Tag}\tX: {X_coordinate}m\tY: {Y_coordinate}m\tAlt: {Altitude}m\tSpeed: {Math.Round(Speed, 2)}ms\t Coords: {Coords} degree\t{TimeStamp}");
+            return string.Format($"Tag: {Tag}\tX: {X_coordinate}m\tY: {Y_coordinate}m\tAlt: {Altitude}m\t\t" +
+                                 $"Speed: {Math.Round(Speed, 2)}ms\t\tCoords: {Math.Round(Coords, 2)}deg\t\t{TimeStamp}");
         }
     }
 }
