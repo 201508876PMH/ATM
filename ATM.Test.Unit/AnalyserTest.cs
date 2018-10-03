@@ -16,12 +16,15 @@ namespace ATM.Test.Unit
     {
         private Analyser _uut;
         private IUtility _utility;
+        private ILog _log;
 
         [SetUp]
         public void Setup()
         {
             _utility = Substitute.For<IUtility>();
-            _uut = new Analyser(_utility);
+            _log = Substitute.For<ILog>();
+            _uut = new Analyser(_utility, _log);
+
         }
 
         [Test]
@@ -52,6 +55,32 @@ namespace ATM.Test.Unit
             _utility.CalcDistance(a1, a2).Returns(Dist);
             
             Assert.That(_uut.CheckForCollision(a1, a2) == Collision);
+        }
+
+        [Test]
+        public void Test_AnalyseData()
+        {
+            List<AircraftData> FakeAircrafts = new List<AircraftData>();
+
+            AircraftData a1 = new AircraftData("Plane1", 40000, 40000, 10000, null);
+            AircraftData a2 = new AircraftData("Plane2", 10000, 10000, 11000, null);
+            AircraftData a3 = new AircraftData("Plane3", 70000, 70000, 7000, null);
+            AircraftData a4 = new AircraftData("Plane4", 20000, 20000, 12000, null);
+            AircraftData a5 = new AircraftData("Plane5", 75000, 75000, 7300, null);
+            AircraftData a6 = new AircraftData("Plane6", 30000, 30000, 9000, null);
+
+            FakeAircrafts.Add(a1);
+            FakeAircrafts.Add(a2);
+            FakeAircrafts.Add(a3);
+            FakeAircrafts.Add(a4);
+            FakeAircrafts.Add(a5);
+            FakeAircrafts.Add(a6);
+
+            _utility.CalcDistance(a3, a5).Returns(5000);
+
+            _uut.AnalyseData(FakeAircrafts);
+
+            _log.Received().LogSeperationEvent(a3, a5);
         }
     }
 }

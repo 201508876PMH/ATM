@@ -73,6 +73,7 @@
     <Compile Include="classes\Utility.cs" />
     <Compile Include="interfaces\IAnalyser.cs" />
     <Compile Include="interfaces\IDecoder.cs" />
+    <Compile Include="interfaces\ILog.cs" />
     <Compile Include="interfaces\IUtility.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
