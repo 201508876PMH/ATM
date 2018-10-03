@@ -160,13 +160,19 @@ namespace ATM.Test.Unit
         }
 
         [Test]
-        public void runSelfTest_testGetterOfAircrafts()
+        public void runSelfTest_UpdateTransponderData()
         {
-            AircraftData AC1 = new AircraftData("FLIGHT01", 0001, 00001, 00001, new TimeStamp(0001, 01, 1, 1, 1, 1, 1));
-            List<AircraftData> holderList = new List<AircraftData>();
-            holderList.Add(AC1);
-           
-            //Assert.That(holderList.;
+            List<string> listOfStrings = new List<string>();
+            string testerString = "ATR423;39045;12932;14000;20151006213456789";
+            string testerString1 = "ATR424;39045;12932;14000;20151006213456789";
+
+            listOfStrings.Add(testerString);
+            listOfStrings.Add(testerString1);
+
+            _uut.UpdateTransponderData(listOfStrings);
+
+            Assert.That(_uut._Aircrafts[0].Tag == "ATR423");
+            Assert.That(_uut._Aircrafts[1].Tag == "ATR424");
         }
 
     }
