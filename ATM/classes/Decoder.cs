@@ -87,6 +87,7 @@ namespace ATM.classes
                 foreach (var item in nList)
                 {
                     item.Speed = _utility.Speed(item, oList[i]);
+                    item.Coords = _utility.CalculateDegree(item, oList[i]);
                     ++i;
                 }
             }
@@ -95,6 +96,7 @@ namespace ATM.classes
                 for (int j = 0; j < nList.Count(); j++)
                 {
                     nList[j].Speed = _utility.Speed(nList[j], oList[j]);
+                    nList[j].Coords = _utility.CalculateDegree(nList[j], oList[j]);
                 }
             }
             else
@@ -102,6 +104,8 @@ namespace ATM.classes
                 for (int j = 0; j < oList.Count(); j++)
                 {
                     nList[j].Speed = _utility.Speed(nList[j], oList[j]);
+
+                    nList[j].Coords = _utility.CalculateDegree(nList[j], oList[j]);
                 }
             }
         }
