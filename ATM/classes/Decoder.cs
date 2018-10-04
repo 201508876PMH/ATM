@@ -22,12 +22,14 @@ namespace ATM.classes
 
         // We create two lists, reasoned that when calculating flight speed,
         // we need the distance the flight has traveled from the previous to current location
-        public List<AircraftData> _Aircrafts { get; set; }
-        public List<AircraftData> _OldAircraftDatas { get; set; }
+       
 
 
         // A method for cloning, from one list to another
         // We create this method because a deep clone funktion isnt availible for lists
+        public List<AircraftData> _Aircrafts { get; set; }
+        public List<AircraftData> _OldAircraftDatas { get; set; }
+
         public List<AircraftData> CloneList(List<AircraftData> _list)
         {
             List<AircraftData> newList = new List<AircraftData>();

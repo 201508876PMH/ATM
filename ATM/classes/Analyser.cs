@@ -19,6 +19,8 @@ namespace ATM.classes
             _log = log;
         }
 
+        public List<AircraftData> _FilteredAircrafts { get; set; }
+
         public void FilterAircrafts(List<AircraftData> _list)
         {
             //List<AircraftData> FilteredAircrafts = new List<AircraftData>();
@@ -69,6 +71,6 @@ namespace ATM.classes
                 }
             }
         }
-        public List<AircraftData> _FilteredAircrafts;
+        
     }
 }

@@ -9,6 +9,10 @@ namespace ATM.interfaces
 {
     public interface IDecoder
     {
+        // Getters and setters for airCraft list
+        List<AircraftData> _Aircrafts { get; set; }
+        List<AircraftData> _OldAircraftDatas { get; set; }
+
         // A method for cloning, from one list to another
         // We create this method because a deep clone funktion isnt availible for lists
         List<AircraftData> CloneList(List<AircraftData> _list);
