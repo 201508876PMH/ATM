@@ -22,7 +22,6 @@ namespace ATM.classes
         public int Y_coordinate { get; set; }
         public int Altitude { get; set; }
         public TimeStamp TimeStamp { get; set; }
-        public int CompassCourse { get; set; }
         public double Speed { get; set; }
 
         public double Coords { get; set; }
