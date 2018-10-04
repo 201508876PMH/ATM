@@ -9,6 +9,10 @@ namespace ATM.interfaces
 {
     public interface IDecoder
     {
+        // Getters and setters for airCraft list
+        List<AircraftData> _Aircrafts { get; set; }
+        List<AircraftData> _OldAircraftDatas { get; set; }
+
         // A method for cloning, from one list to another
         // We create this method because a deep clone funktion isnt availible for lists
         List<AircraftData> CloneList(List<AircraftData> _list);
@@ -22,7 +26,7 @@ namespace ATM.interfaces
 
         // A method for inserting speed. This method takes to lists as argument, reasoned
         // it inserts the speed 
-        void InsertSpeed(List<AircraftData> oList, List<AircraftData> nList);
+        void InsertSpeedAndCourse(List<AircraftData> oList, List<AircraftData> nList);
 
     }
 }

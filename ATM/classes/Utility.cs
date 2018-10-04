@@ -57,21 +57,7 @@ namespace ATM.classes
                 {
                     angel += 360-90;
                 }
-                else
-                {
-                    angel -= 90;
-                }
             }
-            /*
-            if (angel - 90 < 0)
-            {
-                return angel - 90 + 360;
-            }
-            else
-            {
-                return angel - 90;
-            }
-            */
             
 
             return angel;

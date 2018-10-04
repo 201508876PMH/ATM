@@ -22,12 +22,14 @@ namespace ATM.classes
 
         // We create two lists, reasoned that when calculating flight speed,
         // we need the distance the flight has traveled from the previous to current location
-        public List<AircraftData> _Aircrafts { get; set; }
-        public List<AircraftData> _OldAircraftDatas { get; set; }
+       
 
 
         // A method for cloning, from one list to another
         // We create this method because a deep clone funktion isnt availible for lists
+        public List<AircraftData> _Aircrafts { get; set; }
+        public List<AircraftData> _OldAircraftDatas { get; set; }
+
         public List<AircraftData> CloneList(List<AircraftData> _list)
         {
             List<AircraftData> newList = new List<AircraftData>();
@@ -44,6 +46,7 @@ namespace ATM.classes
         // We first clone the objects from TrasnponderData to a 'old' list
         public void UpdateTransponderData(List<string> _TransponderData)
         {
+            _OldAircraftDatas.Clear();
             _OldAircraftDatas = CloneList(_Aircrafts);
             _Aircrafts.Clear();
 
@@ -52,7 +55,7 @@ namespace ATM.classes
                 _Aircrafts.Add(DecodeString(item));
             }
 
-            InsertSpeed(_OldAircraftDatas, _Aircrafts);
+            InsertSpeedAndCourse(_OldAircraftDatas, _Aircrafts);
         }
 
 
@@ -76,7 +79,7 @@ namespace ATM.classes
 
         // A method for inserting speed. This method takes to lists as argument, reasoned
         // it inserts the speed 
-        public void InsertSpeed(List<AircraftData> oList, List<AircraftData> nList)
+        public void InsertSpeedAndCourse(List<AircraftData> oList, List<AircraftData> nList)
         {
             int i = 0;
 
@@ -87,6 +90,7 @@ namespace ATM.classes
                 foreach (var item in nList)
                 {
                     item.Speed = _utility.Speed(item, oList[i]);
+                    item.Coords = _utility.CalculateDegree(item, oList[i]);
                     ++i;
                 }
             }
@@ -95,6 +99,7 @@ namespace ATM.classes
                 for (int j = 0; j < nList.Count(); j++)
                 {
                     nList[j].Speed = _utility.Speed(nList[j], oList[j]);
+                    nList[j].Coords = _utility.CalculateDegree(nList[j], oList[j]);
                 }
             }
             else
@@ -102,6 +107,8 @@ namespace ATM.classes
                 for (int j = 0; j < oList.Count(); j++)
                 {
                     nList[j].Speed = _utility.Speed(nList[j], oList[j]);
+
+                    nList[j].Coords = _utility.CalculateDegree(nList[j], oList[j]);
                 }
             }
         }

@@ -23,22 +23,22 @@ namespace ATM.classes
             _receiver.TransponderDataReady += ReceiverOnTransponderDataReady;
         }
 
-        private void ReceiverOnTransponderDataReady(object sender, RawTransponderDataEventArgs e)
+        public void ReceiverOnTransponderDataReady(object sender, RawTransponderDataEventArgs e)
         {
             // Decode data
             Console.Clear();
             Console.WriteLine("Received transponder data:");
 
-            /*_decoder.UpdateTransponderData(e.TransponderData);
+            _decoder.UpdateTransponderData(e.TransponderData);
 
             _analyser.AnalyseData(_decoder._Aircrafts);
 
-            foreach (var item in analyser._FilteredAircrafts)
+            foreach (var item in _analyser._FilteredAircrafts)
             {
                 Console.WriteLine(item.ToString());
             }
-            */
-            //_decoder.
+            
+            
         }
         
     }

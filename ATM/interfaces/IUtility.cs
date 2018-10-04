@@ -13,6 +13,8 @@ namespace ATM.interfaces
 
         int ConvertTimeToMilliseconds(AircraftData obj);
 
+        double CalculateDegree(AircraftData newPosition, AircraftData oldPosition);
+
         double Speed(AircraftData newPosition, AircraftData oldPosition);
     }
 }

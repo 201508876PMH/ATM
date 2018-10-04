@@ -22,11 +22,14 @@ namespace ATM.classes
         public int Y_coordinate { get; set; }
         public int Altitude { get; set; }
         public TimeStamp TimeStamp { get; set; }
-        public int CompassCourse { get; set; }
         public double Speed { get; set; }
+
+        public double Coords { get; set; }
+
         public override string ToString()
         {
-            return string.Format($"Tag: {Tag}\tX: {X_coordinate}m\tY: {Y_coordinate}m\tAlt: {Altitude}m\tSpeed: {Math.Round(Speed, 2)}ms\t{TimeStamp}");
+            return string.Format($"Tag: {Tag}\tX: {X_coordinate}m\tY: {Y_coordinate}m\tAlt: {Altitude}m\t\t" +
+                                 $"Speed: {Math.Round(Speed, 2)}ms\t\tCoords: {Math.Round(Coords, 2)}deg\t\t{TimeStamp}");
         }
     }
 }
