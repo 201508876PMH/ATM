@@ -26,7 +26,7 @@ namespace ATM.interfaces
 
         // A method for inserting speed. This method takes to lists as argument, reasoned
         // it inserts the speed 
-        void InsertSpeed(List<AircraftData> oList, List<AircraftData> nList);
+        void InsertSpeedAndCourse(List<AircraftData> oList, List<AircraftData> nList);
 
     }
 }
