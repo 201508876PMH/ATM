@@ -18,17 +18,10 @@ namespace ATM.classes
             fd.Close();
 
             File.AppendAllText(@"log.txt", $"Seperation events log: " + Environment.NewLine + Environment.NewLine);
-            //File.AppendAllLines();
-            //_stream = File.CreateText("log.txt");
-
-            //_stream.Write($"Seperation events log: " + Environment.NewLine + Environment.NewLine);
         }
 
         public void LogSeperationEvent(AircraftData a1, AircraftData a2)
         {
-            //_stream.WriteLine($"WARNING! Possible collision between flight {a1.Tag} and {a2.Tag}."
-            //                     + Environment.NewLine + a1.ToString() + Environment.NewLine + a2.ToString() + Environment.NewLine + Environment.NewLine);
-
             File.AppendAllText(@"log.txt", $"WARNING! Possible collision between flight {a1.Tag} and {a2.Tag}."
                                            + Environment.NewLine + a1.ToString() + Environment.NewLine + a2.ToString() + Environment.NewLine + Environment.NewLine);
         }

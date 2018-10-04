@@ -23,7 +23,9 @@ namespace ATM.classes
 
         public void FilterAircrafts(List<AircraftData> _list)
         {
-            List<AircraftData> FilteredAircrafts = new List<AircraftData>();
+            //List<AircraftData> FilteredAircrafts = new List<AircraftData>();
+
+            _FilteredAircrafts.Clear();
 
             foreach (var item in _list)
             {
@@ -57,7 +59,7 @@ namespace ATM.classes
             {
                 for (int j = i + 1; j < _FilteredAircrafts.Count(); j++)
                 {
-                    if (CheckForCollision(_FilteredAircrafts[i], _FilteredAircrafts[j]) == true)
+                    if (CheckForCollision(_FilteredAircrafts[i], _FilteredAircrafts[j]) == true /*&& (_FilteredAircrafts[i] != _FilteredAircrafts[j])*/)
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine($"WARNING! Possible collision between flight {_FilteredAircrafts[i].Tag} " +

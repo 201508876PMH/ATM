@@ -46,6 +46,7 @@ namespace ATM.classes
         // We first clone the objects from TrasnponderData to a 'old' list
         public void UpdateTransponderData(List<string> _TransponderData)
         {
+            _OldAircraftDatas.Clear();
             _OldAircraftDatas = CloneList(_Aircrafts);
             _Aircrafts.Clear();
 
@@ -54,7 +55,7 @@ namespace ATM.classes
                 _Aircrafts.Add(DecodeString(item));
             }
 
-            InsertSpeed(_OldAircraftDatas, _Aircrafts);
+            InsertSpeedAndCourse(_OldAircraftDatas, _Aircrafts);
         }
 
 
@@ -78,7 +79,7 @@ namespace ATM.classes
 
         // A method for inserting speed. This method takes to lists as argument, reasoned
         // it inserts the speed 
-        public void InsertSpeed(List<AircraftData> oList, List<AircraftData> nList)
+        public void InsertSpeedAndCourse(List<AircraftData> oList, List<AircraftData> nList)
         {
             int i = 0;
 
