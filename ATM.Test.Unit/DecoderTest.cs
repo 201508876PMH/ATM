@@ -108,7 +108,7 @@ namespace ATM.Test.Unit
             newFakeList.Add(new AircraftData("FlIGHT02", 0000, 00000, 00002, new TimeStamp(0002, 02, 2, 2, 2, 2, 2)));
             newFakeList.Add(new AircraftData("FlIGHT03", 0000, 00000, 00003, new TimeStamp(0003, 03, 3, 3, 3, 3, 3)));
 
-            _uut.InsertSpeed(oldFakeList, newFakeList);
+            _uut.InsertSpeedAndCourse(oldFakeList, newFakeList);
 
             Assert.That(newFakeList[0].Speed == oldFakeList[0].Speed);
             Assert.That(newFakeList[1].Speed == oldFakeList[1].Speed);
@@ -130,7 +130,7 @@ namespace ATM.Test.Unit
             newFakeList.Add(new AircraftData("FlIGHT02", 0000, 00000, 00002, new TimeStamp(0002, 02, 2, 2, 2, 2, 2)));
             
 
-            _uut.InsertSpeed(oldFakeList, newFakeList);
+            _uut.InsertSpeedAndCourse(oldFakeList, newFakeList);
 
             Assert.That(newFakeList[0].Speed == oldFakeList[0].Speed);
             Assert.That(newFakeList[1].Speed == oldFakeList[1].Speed);
@@ -152,7 +152,7 @@ namespace ATM.Test.Unit
             newFakeList.Add(new AircraftData("FlIGHT02", 0000, 00000, 00002, new TimeStamp(0002, 02, 2, 2, 2, 2, 2)));
             newFakeList.Add(new AircraftData("FlIGHT03", 0000, 00000, 00003, new TimeStamp(0003, 03, 3, 3, 3, 3, 3)));
 
-            _uut.InsertSpeed(oldFakeList, newFakeList);
+            _uut.InsertSpeedAndCourse(oldFakeList, newFakeList);
 
             Assert.That(newFakeList[0].Speed == oldFakeList[0].Speed);
             Assert.That(newFakeList[1].Speed == oldFakeList[1].Speed);
