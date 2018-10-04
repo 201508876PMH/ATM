@@ -74,6 +74,8 @@ namespace ATM.Test.Unit
            AircraftData holder;
 
            holder = _uut.DecodeString(stringToDecode);
+           holder.Coords = 342.0;
+
 
             Assert.That(holder.Tag == "ATR423");
             Assert.That(holder.X_coordinate == int.Parse("39045"));
@@ -88,7 +90,7 @@ namespace ATM.Test.Unit
             Assert.That(holder.TimeStamp.day == 06);
             Assert.That(holder.TimeStamp.month == 10);
             Assert.That(holder.TimeStamp.year == 2015);
-            
+            Assert.That(holder.Coords == 342.0); 
 
         }
 

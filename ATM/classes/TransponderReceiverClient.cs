@@ -23,7 +23,7 @@ namespace ATM.classes
             _receiver.TransponderDataReady += ReceiverOnTransponderDataReady;
         }
 
-        private void ReceiverOnTransponderDataReady(object sender, RawTransponderDataEventArgs e)
+        public void ReceiverOnTransponderDataReady(object sender, RawTransponderDataEventArgs e)
         {
             // Decode data
             Console.Clear();
