@@ -72,6 +72,7 @@
     <Compile Include="classes\TimeStamp.cs" />
     <Compile Include="classes\TransponderReceiverClient.cs" />
     <Compile Include="classes\Utility.cs" />
+    <Compile Include="EventArgsClasses\AnalysedTransponderDataEventArgs.cs" />
     <Compile Include="EventArgsClasses\DecodedTransponderDataEventArgs.cs" />
     <Compile Include="interfaces\IAnalyser.cs" />
     <Compile Include="interfaces\IConsoleOutPutter.cs" />
