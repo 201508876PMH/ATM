@@ -16,5 +16,9 @@ namespace ATM.interfaces
         void AnalyseData(List<AircraftData> _aircrafts);
 
         event EventHandler<AnalysedTransponderDataEventArgs> AnalysedDataReadyEvent;
+
+        event EventHandler<SeparationAircraftsData> SeparationEvent;
+        event EventHandler<AircraftData> TrackEnteredAirSpaceEvent;
+        event EventHandler<AircraftData> TrackLeftAirSpaceEvent;
     }
 }

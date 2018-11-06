@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ATM.classes
 {
-    public class AircraftData
+    public class AircraftData : EventArgs
     {
         public AircraftData(string tag, int x_coordinate, int y_coordinate, int altitude, TimeStamp timeStamp)
         {

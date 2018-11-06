@@ -19,10 +19,6 @@ namespace ATM.interfaces
 
         void DecoderOnTransponderDataReady(object sender, RawTransponderDataEventArgs e);
 
-        // A method for cloning, from one list to another
-        // We create this method because a deep clone funktion isnt availible for lists
-        List<AircraftData> CloneList(List<AircraftData> _list);
-
         // A method for updating our lists, both old and new
         // We first clone the objects from TrasnponderData to a 'old' list
         void UpdateTransponderData(List<string> _TransponderData);

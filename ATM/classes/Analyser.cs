@@ -21,8 +21,8 @@ namespace ATM.classes
         public event EventHandler<AnalysedTransponderDataEventArgs> AnalysedDataReadyEvent;
 
         public event EventHandler<SeparationAircraftsData> SeparationEvent;
-        public event EventHandler<AircraftData> TrackEnteredAirspaceEvent;
-        public event EventHandler<AircraftData> TrackLeftAirspaceEvent;
+        public event EventHandler<AircraftData> TrackEnteredAirSpaceEvent;
+        public event EventHandler<AircraftData> TrackLeftAirSpaceEvent;
 
         public Analyser(IUtility utility, IDecoder decoder)
         {
@@ -75,7 +75,7 @@ namespace ATM.classes
         {
             FilterAircrafts(_aircrafts);
             CheckForTrackEnteredAirspace();
-
+            CheckForTrackLeftAirspace();
 
             for (int i = 0; i < _FilteredAircrafts.Count(); i++)
             {
@@ -107,7 +107,7 @@ namespace ATM.classes
                 if (CheckIfTrackIsNewInAirspace(item))
                 {
                     //raise track entered airspace event
-                    TrackEnteredAirspaceEvent(this, item);
+                    TrackEnteredAirSpaceEvent(this, item);
                 }
             }
         }
@@ -131,7 +131,7 @@ namespace ATM.classes
                 if (CheckIfTrackIsGoneFromAirspace(item))
                 {
                     //raise event
-                    TrackLeftAirspaceEvent(this, item);
+                    TrackLeftAirSpaceEvent(this, item);
                 }
             }
         }
