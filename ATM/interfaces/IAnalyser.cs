@@ -13,5 +13,7 @@ namespace ATM.interfaces
         void FilterAircrafts(List<AircraftData> _list);
         bool CheckForCollision(AircraftData obj1, AircraftData obj2);
         void AnalyseData(List<AircraftData> _aircrafts);
+
+
     }
 }
