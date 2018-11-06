@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ATM.classes;
+using ATM.EventArgsClasses;
 
 namespace ATM.interfaces
 {
@@ -13,5 +14,7 @@ namespace ATM.interfaces
         void FilterAircrafts(List<AircraftData> _list);
         bool CheckForCollision(AircraftData obj1, AircraftData obj2);
         void AnalyseData(List<AircraftData> _aircrafts);
+
+        event EventHandler<AnalysedTransponderDataEventArgs> AnalysedTransponderDataEventArgs;
     }
 }
