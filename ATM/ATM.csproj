@@ -74,6 +74,7 @@
     <Compile Include="classes\Utility.cs" />
     <Compile Include="EventArgsClasses\AnalysedTransponderDataEventArgs.cs" />
     <Compile Include="EventArgsClasses\DecodedTransponderDataEventArgs.cs" />
+    <Compile Include="EventArgsClasses\SeparationAircraftsData.cs" />
     <Compile Include="interfaces\IAnalyser.cs" />
     <Compile Include="interfaces\IConsoleOutPutter.cs" />
     <Compile Include="interfaces\IDecoder.cs" />

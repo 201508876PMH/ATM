@@ -64,6 +64,19 @@ namespace ATM.classes
 
 
         }
-        
+
+
+        // A method for cloning, from one list to another
+        // We create this method because a deep clone funktion isnt availible for lists
+        public List<AircraftData> CloneList(List<AircraftData> _list)
+        {
+            List<AircraftData> newList = new List<AircraftData>();
+
+            foreach (var item in _list)
+            {
+                newList.Add(item);
+            }
+            return newList;
+        }
     }
 }

@@ -14,14 +14,20 @@ namespace ATM.classes
         private IUtility _utility;
         //private ILog _log;
 
+        public List<AircraftData> _FilteredAircrafts { get; set; }
+        public List<AircraftData> _OldFilteredAircrafts { get; set; }
+
         /* Our [Analyser]eventhandler for hooking to the [Decoder]eventhandler */
         public event EventHandler<AnalysedTransponderDataEventArgs> AnalysedTransponderDataEventArgs;
+
+        public event EventHandler<SeparationAircraftsData> SeparationEvent;
+        public event EventHandler<AircraftData> TrackEnteredAirspaceEvent;
+        public event EventHandler<AircraftData> TrackLeftAirspaceEvent;
 
         public Analyser(IUtility utility, IDecoder decoder)
         {
             _FilteredAircrafts = new List<AircraftData>();
             _utility = utility;
-
 
             /* Here we hook our [Analyser]eventHandler to the AnalyserOfTransponderDataEventArgs method */
             decoder.DecodedTransponderDataReady += AnalyserOfTransponderDataEventArgs;
@@ -33,15 +39,11 @@ namespace ATM.classes
         {
             AnalyseData(e._AircraftData);
         }
-
-
-
-
-        public List<AircraftData> _FilteredAircrafts { get; set; }
+        
 
         public void FilterAircrafts(List<AircraftData> _list)
         {
-            //List<AircraftData> FilteredAircrafts = new List<AircraftData>();
+            _OldFilteredAircrafts = _utility.CloneList(_FilteredAircrafts);
 
             _FilteredAircrafts.Clear();
 
@@ -72,17 +74,21 @@ namespace ATM.classes
         public void AnalyseData(List<AircraftData> _aircrafts)
         {
             FilterAircrafts(_aircrafts);
+            CheckForTrackEnteredAirspace();
+
 
             for (int i = 0; i < _FilteredAircrafts.Count(); i++)
             {
                 for (int j = i + 1; j < _FilteredAircrafts.Count(); j++)
                 {
-                    if (CheckForCollision(_FilteredAircrafts[i], _FilteredAircrafts[j]) == true /*&& (_FilteredAircrafts[i] != _FilteredAircrafts[j])*/)
+                    if (CheckForCollision(_FilteredAircrafts[i], _FilteredAircrafts[j]) == true)
                     {
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine($"WARNING! Possible collision between flight {_FilteredAircrafts[i].Tag} " +
-                                          $"and {_FilteredAircrafts[j].Tag}.");
-                        Console.ResetColor();
+                        SeparationEvent(this, new SeparationAircraftsData(_FilteredAircrafts[i], _FilteredAircrafts[j]));
+
+                        //Console.ForegroundColor = ConsoleColor.Red;
+                        //Console.WriteLine($"WARNING! Possible collision between flight {_FilteredAircrafts[i].Tag} " +
+                        //                  $"and {_FilteredAircrafts[j].Tag}.");
+                        //Console.ResetColor();
 
                         //_log.LogSeperationEvent(_FilteredAircrafts[i], _FilteredAircrafts[j]);
                     }
@@ -91,6 +97,55 @@ namespace ATM.classes
             /* We remember to raise an event for the next class, that wants to hook */
             AnalysedTransponderDataEventArgs(this, new AnalysedTransponderDataEventArgs(_FilteredAircrafts));
         }
-        
+
+
+
+        public void CheckForTrackEnteredAirspace()
+        {
+            foreach (var item in _FilteredAircrafts)
+            {
+                if (CheckIfTrackIsNewInAirspace(item))
+                {
+                    //raise track entered airspace event
+                    TrackEnteredAirspaceEvent(this, item);
+                }
+            }
+        }
+
+        public bool CheckIfTrackIsNewInAirspace(AircraftData track)
+        {
+            foreach (var item in _OldFilteredAircrafts)
+            {
+                if (item.Tag == track.Tag)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public void CheckForTrackLeftAirspace()
+        {
+            foreach (var item in _OldFilteredAircrafts)
+            {
+                if (CheckIfTrackIsGoneFromAirspace(item))
+                {
+                    //raise event
+                    TrackLeftAirspaceEvent(this, item);
+                }
+            }
+        }
+
+        public bool CheckIfTrackIsGoneFromAirspace(AircraftData OldTrack)
+        {
+            foreach (var item in _FilteredAircrafts)
+            {
+                if (item.Tag == OldTrack.Tag)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
     }
 }

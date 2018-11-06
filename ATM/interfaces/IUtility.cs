@@ -16,5 +16,7 @@ namespace ATM.interfaces
         double CalculateDegree(AircraftData newPosition, AircraftData oldPosition);
 
         double Speed(AircraftData newPosition, AircraftData oldPosition);
+
+        List<AircraftData> CloneList(List<AircraftData> _list);
     }
 }

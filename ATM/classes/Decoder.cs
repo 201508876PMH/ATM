@@ -45,20 +45,7 @@ namespace ATM.classes
         // We create two lists, reasoned that when calculating flight speed,
         // we need the distance the flight has traveled from the previous to current location
 
-
-        // A method for cloning, from one list to another
-        // We create this method because a deep clone funktion isnt availible for lists
-
-        public List<AircraftData> CloneList(List<AircraftData> _list)
-        {
-            List<AircraftData> newList = new List<AircraftData>();
-
-            foreach (var item in _list)
-            {
-                newList.Add(item);
-            }
-            return newList;
-        }
+            
 
 
         // A method for updating our lists, both old and new
@@ -66,7 +53,7 @@ namespace ATM.classes
         public void UpdateTransponderData(List<string> _TransponderData)
         {
             _OldAircraftDatas.Clear();
-            _OldAircraftDatas = CloneList(_Aircrafts);
+            _OldAircraftDatas = _utility.CloneList(_Aircrafts);
             _Aircrafts.Clear();
 
             foreach (var item in _TransponderData)
