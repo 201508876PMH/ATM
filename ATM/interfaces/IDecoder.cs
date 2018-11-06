@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ATM.classes;
 using ATM.EventArgsClasses;
+using TransponderReceiver;
 
 namespace ATM.interfaces
 {
@@ -15,6 +16,8 @@ namespace ATM.interfaces
         List<AircraftData> _OldAircraftDatas { get; set; }
         
         event EventHandler<DecodedTransponderDataEventArgs> DecodedDataReadyEvent;
+
+        void DecoderOnTransponderDataReady(object sender, RawTransponderDataEventArgs e);
 
         // A method for cloning, from one list to another
         // We create this method because a deep clone funktion isnt availible for lists
