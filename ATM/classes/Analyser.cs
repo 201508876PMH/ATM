@@ -12,6 +12,9 @@ namespace ATM.classes
         private IUtility _utility;
         private ILog _log;
 
+        public List<AircraftData> _FilteredAircrafts { get; set; }
+        public List<AircraftData> _OldFilteredAircrafts { get; set; }
+
         public Analyser(IUtility utility, ILog log)
         {
             _FilteredAircrafts = new List<AircraftData>();
@@ -19,7 +22,7 @@ namespace ATM.classes
             _log = log;
         }
 
-        public List<AircraftData> _FilteredAircrafts { get; set; }
+        
 
         public void FilterAircrafts(List<AircraftData> _list)
         {
@@ -50,6 +53,8 @@ namespace ATM.classes
 
             return false;
         }
+
+        
 
         public void AnalyseData(List<AircraftData> _aircrafts)
         {
