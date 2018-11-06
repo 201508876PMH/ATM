@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ATM.classes;
 
+
 namespace ATM.EventArgsClasses
 {
     public class DecodedTransponderDataEventArgs : EventArgs

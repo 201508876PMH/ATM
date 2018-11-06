@@ -3,21 +3,39 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ATM.EventArgsClasses;
 using ATM.interfaces;
+using TransponderReceiver;
 
 namespace ATM.classes
 {
     public class Analyser : IAnalyser
     {
         private IUtility _utility;
-        private ILog _log;
+        //private ILog _log;
 
-        public Analyser(IUtility utility, ILog log)
+        /* Our [Analyser]eventhandler for hooking to the [Decoder]eventhandler */
+        public event EventHandler<AnalysedTransponderDataEventArgs> AnalysedTransponderDataEventArgs;
+
+        public Analyser(IUtility utility, IDecoder decoder)
         {
             _FilteredAircrafts = new List<AircraftData>();
             _utility = utility;
-            _log = log;
+
+
+            /* Here we hook our [Analyser]eventHandler to the AnalyserOfTransponderDataEventArgs method */
+            decoder.DecodedTransponderDataReady += AnalyserOfTransponderDataEventArgs;
         }
+
+        /* The method from which we hook to. This method a default parameter signature, which must be held */
+        /* Our method then calls the last executing method from our class[Analyser] with the matching argument */
+        public void AnalyserOfTransponderDataEventArgs(object data, DecodedTransponderDataEventArgs e)
+        {
+            AnalyseData(e._AircraftData);
+        }
+
+
+
 
         public List<AircraftData> _FilteredAircrafts { get; set; }
 
@@ -66,10 +84,12 @@ namespace ATM.classes
                                           $"and {_FilteredAircrafts[j].Tag}.");
                         Console.ResetColor();
 
-                        _log.LogSeperationEvent(_FilteredAircrafts[i], _FilteredAircrafts[j]);
+                        //_log.LogSeperationEvent(_FilteredAircrafts[i], _FilteredAircrafts[j]);
                     }
                 }
             }
+            /* We remember to raise an event for the next class, that wants to hook */
+            AnalysedTransponderDataEventArgs(this, new AnalysedTransponderDataEventArgs(_FilteredAircrafts));
         }
         
     }
