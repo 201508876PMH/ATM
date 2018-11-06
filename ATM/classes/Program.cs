@@ -16,6 +16,16 @@ namespace ATM
         {
             // Using the real transponder data receiver
 
+            ITransponderReceiver receiver = TransponderReceiverFactory.CreateTransponderDataReceiver();
+
+            IDecoder decoder = new classes.Decoder(receiver, new Utility());
+
+            IAnalyser analyser = new Analyser(new Utility(), decoder);
+
+            IConsoleOutPutter consoleOutPutter = new ConsoleOutPutter(analyser);
+
+
+       
             /*
             ITransponderReceiver receiver = TransponderReceiverFactory.CreateTransponderDataReceiver();
             IAnalyser analyser = new Analyser(new Utility(), new Log());

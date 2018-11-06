@@ -15,7 +15,7 @@ namespace ATM.classes
         //private ILog _log;
 
         /* Our [Analyser]eventhandler for hooking to the [Decoder]eventhandler */
-        public event EventHandler<AnalysedTransponderDataEventArgs> AnalysedTransponderDataEventArgs;
+        public event EventHandler<AnalysedTransponderDataEventArgs> AnalysedDataReadyEvent;
 
         public Analyser(IUtility utility, IDecoder decoder)
         {
@@ -24,12 +24,12 @@ namespace ATM.classes
 
 
             /* Here we hook our [Analyser]eventHandler to the AnalyserOfTransponderDataEventArgs method */
-            decoder.DecodedTransponderDataReady += AnalyserOfTransponderDataEventArgs;
+            decoder.DecodedDataReadyEvent += AnalyseEventMethod;
         }
 
         /* The method from which we hook to. This method a default parameter signature, which must be held */
         /* Our method then calls the last executing method from our class[Analyser] with the matching argument */
-        public void AnalyserOfTransponderDataEventArgs(object data, DecodedTransponderDataEventArgs e)
+        public void AnalyseEventMethod(object data, DecodedTransponderDataEventArgs e)
         {
             AnalyseData(e._AircraftData);
         }
@@ -89,7 +89,7 @@ namespace ATM.classes
                 }
             }
             /* We remember to raise an event for the next class, that wants to hook */
-            AnalysedTransponderDataEventArgs(this, new AnalysedTransponderDataEventArgs(_FilteredAircrafts));
+            AnalysedDataReadyEvent(this, new AnalysedTransponderDataEventArgs(_FilteredAircrafts));
         }
         
     }

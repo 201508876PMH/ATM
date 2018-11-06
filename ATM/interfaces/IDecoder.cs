@@ -13,8 +13,8 @@ namespace ATM.interfaces
         // Getters and setters for airCraft list
         List<AircraftData> _Aircrafts { get; set; }
         List<AircraftData> _OldAircraftDatas { get; set; }
-
-        event EventHandler<DecodedTransponderDataEventArgs> DecodedTransponderDataReady;
+        
+        event EventHandler<DecodedTransponderDataEventArgs> DecodedDataReadyEvent;
 
         // A method for cloning, from one list to another
         // We create this method because a deep clone funktion isnt availible for lists

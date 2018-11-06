@@ -5,11 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using ATM.EventArgsClasses;
+
 namespace ATM.classes
 {
     public class ConsoleOutPutter : IConsoleOutPutter
     {
 
+        public static int ticks = 0;
         public IAnalyser _Analyser { get; set; }
 
 
@@ -17,7 +20,7 @@ namespace ATM.classes
         {
             _Analyser = analyser;
 
-                        +=
+            _Analyser.AnalysedDataReadyEvent += OutPutAircraftDataEventHandler;          
 
 
         }
@@ -27,14 +30,25 @@ namespace ATM.classes
             Console.Clear();
         }
 
+
+        public void OutPutAircraftDataEventHandler(object o, AnalysedTransponderDataEventArgs e)
+        {
+            OutPutAircraftsWithinArea(e._AircraftData);
+            
+        }
+
         public void OutPutAircraftsWithinArea(List<AircraftData> aircraftData)
         {
-            Console.WriteLine("Received transponder data:");
+
+            ClearConsole();
+            Console.WriteLine($"Received transponder data, count : {ticks}");
 
             foreach (var item in aircraftData)
             {
                 Console.WriteLine(item.ToString());
             }
+
+            ticks++;
         }
 
      

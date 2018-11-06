@@ -17,7 +17,7 @@ namespace ATM.classes
         public List<AircraftData> _Aircrafts { get; set; }
         public List<AircraftData> _OldAircraftDatas { get; set; }
 
-        public event EventHandler<DecodedTransponderDataEventArgs> DecodedTransponderDataReady;
+        public event EventHandler<DecodedTransponderDataEventArgs> DecodedDataReadyEvent;
 
         public Decoder(ITransponderReceiver receiver, IUtility utility)
         {
@@ -31,6 +31,7 @@ namespace ATM.classes
 
         public void DecoderOnTransponderDataReady(object sender, RawTransponderDataEventArgs e)
         {
+
             UpdateTransponderData(e.TransponderData);
         }
 
@@ -76,7 +77,7 @@ namespace ATM.classes
 
             InsertSpeedAndCourse(_OldAircraftDatas, _Aircrafts);
 
-            DecodedTransponderDataReady(this, new DecodedTransponderDataEventArgs(_Aircrafts));
+            DecodedDataReadyEvent(this, new DecodedTransponderDataEventArgs(_Aircrafts));
         }
 
 
