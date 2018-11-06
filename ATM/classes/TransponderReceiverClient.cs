@@ -32,7 +32,7 @@ namespace ATM.classes
             _decoder.UpdateTransponderData(e.TransponderData);
 
             _analyser.AnalyseData(_decoder._Aircrafts);
-
+                
             foreach (var item in _analyser._FilteredAircrafts)
             {
                 Console.WriteLine(item.ToString());
