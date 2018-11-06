@@ -8,6 +8,7 @@ using NSubstitute;
 using NUnit.Framework;
 using Decoder = ATM.classes.Decoder;
 using ATM.classes;
+using TransponderReceiver;
 
 namespace ATM.Test.Unit
 {
@@ -16,7 +17,7 @@ namespace ATM.Test.Unit
     {
         private Decoder _uut;
         private IUtility _utility;
-        
+        private ITransponderReceiver _reciever;
 
         [SetUp]
         public void setUp()
@@ -27,10 +28,10 @@ namespace ATM.Test.Unit
 
             //if we test multiple classes in conjunction, we add mocks here:
             _utility = Substitute.For<IUtility>();
-            
+            _reciever = Substitute.For<ITransponderReceiver>();
             
             //Constructor injection
-            _uut = new Decoder(_utility);
+            _uut = new Decoder(_reciever, _utility);
         }
 
         [Test]

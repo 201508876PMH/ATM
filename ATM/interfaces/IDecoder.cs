@@ -14,8 +14,8 @@ namespace ATM.interfaces
         // Getters and setters for airCraft list
         List<AircraftData> _Aircrafts { get; set; }
         List<AircraftData> _OldAircraftDatas { get; set; }
-
-        event EventHandler<DecodedTransponderDataEventArgs> DecodedTransponderDataReady;
+        
+        event EventHandler<DecodedTransponderDataEventArgs> DecodedDataReadyEvent;
 
         void DecoderOnTransponderDataReady(object sender, RawTransponderDataEventArgs e);
 

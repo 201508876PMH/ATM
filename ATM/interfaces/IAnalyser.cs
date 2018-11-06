@@ -15,6 +15,6 @@ namespace ATM.interfaces
         bool CheckForCollision(AircraftData obj1, AircraftData obj2);
         void AnalyseData(List<AircraftData> _aircrafts);
 
-        event EventHandler<AnalysedTransponderDataEventArgs> AnalysedTransponderDataEventArgs;
+        event EventHandler<AnalysedTransponderDataEventArgs> AnalysedDataReadyEvent;
     }
 }
