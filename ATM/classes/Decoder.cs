@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ATM.interfaces;
+    using ATM.EventArgsClasses;
+    using ATM.interfaces;
 using TransponderReceiver;
 
 namespace ATM.classes
@@ -11,24 +12,42 @@ namespace ATM.classes
     public class Decoder : IDecoder
     {
         private IUtility _utility;
+        private ITransponderReceiver _receiver;
 
-        public Decoder(IUtility utility)
+        public List<AircraftData> _Aircrafts { get; set; }
+        public List<AircraftData> _OldAircraftDatas { get; set; }
+
+        public event EventHandler<DecodedTransponderDataEventArgs> DecodedTransponderDataReady;
+
+        public Decoder(ITransponderReceiver receiver, IUtility utility)
         {
+            _receiver = receiver;
+            _utility = utility;
             _Aircrafts = new List<AircraftData>();
             _OldAircraftDatas = new List<AircraftData>();
-            _utility = utility;
+
+            receiver.TransponderDataReady += DecoderOnTransponderDataReady;
         }
+
+        public void DecoderOnTransponderDataReady(object sender, RawTransponderDataEventArgs e)
+        {
+            UpdateTransponderData(e.TransponderData);
+        }
+
+        //public Decoder(IUtility utility)
+        //{
+        //    _Aircrafts = new List<AircraftData>();
+        //    _OldAircraftDatas = new List<AircraftData>();
+        //    _utility = utility;
+        //}
 
 
         // We create two lists, reasoned that when calculating flight speed,
         // we need the distance the flight has traveled from the previous to current location
-       
 
 
         // A method for cloning, from one list to another
         // We create this method because a deep clone funktion isnt availible for lists
-        public List<AircraftData> _Aircrafts { get; set; }
-        public List<AircraftData> _OldAircraftDatas { get; set; }
 
         public List<AircraftData> CloneList(List<AircraftData> _list)
         {
@@ -56,6 +75,8 @@ namespace ATM.classes
             }
 
             InsertSpeedAndCourse(_OldAircraftDatas, _Aircrafts);
+
+            DecodedTransponderDataReady(this, new DecodedTransponderDataEventArgs(_Aircrafts));
         }
 
 

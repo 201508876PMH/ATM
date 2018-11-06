@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ATM.classes;
+using ATM.EventArgsClasses;
 
 namespace ATM.interfaces
 {
@@ -12,6 +13,8 @@ namespace ATM.interfaces
         // Getters and setters for airCraft list
         List<AircraftData> _Aircrafts { get; set; }
         List<AircraftData> _OldAircraftDatas { get; set; }
+
+        event EventHandler<DecodedTransponderDataEventArgs> DecodedTransponderDataReady;
 
         // A method for cloning, from one list to another
         // We create this method because a deep clone funktion isnt availible for lists
