@@ -14,8 +14,8 @@ namespace ATM.classes
         private IUtility _utility;
         private ITransponderReceiver _receiver;
 
-        public List<AircraftData> _Aircrafts { get; set; }
-        public List<AircraftData> _OldAircraftDatas { get; set; }
+        public List<AircraftData> _Aircrafts { get; set; } = new List<AircraftData>();
+        public List<AircraftData> _OldAircraftDatas { get; set; } = new List<AircraftData>();
 
         public event EventHandler<DecodedTransponderDataEventArgs> DecodedDataReadyEvent;
 
