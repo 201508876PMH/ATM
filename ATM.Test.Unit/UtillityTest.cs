@@ -72,13 +72,13 @@ namespace ATM.Test.Unit
             Assert.That(speedMeterPerSec == 35443.61);
         }
 
+
+        // Now Compass is clockWise
         [Test]
-        [TestCase(25100,25000, 29900,30000, 180, 270)] // south- East
-        [TestCase(24900, 25100, 29100, 30000, 90, 180)] // south- West
-        [TestCase(25100, 25000, 30000, 29100, 270, 360)] // north- East
-        [TestCase(24900, 25100, 30000, 29100, 0, 90)] // Nort-West
-
-
+        [TestCase(25100,25000, 29900,30000, 90, 180)] // south- East
+        [TestCase(24900, 25100, 29100, 30000, 180, 270)] // south- West
+        [TestCase(25100, 25000, 30000, 29100, 0, 90)] // north- East
+        [TestCase(24900, 25100, 30000, 29100, 270, 360)] // Nort-West
 
         public void CalculateCourse(int xNew, int xOld, int yNew, int yOld, int grad1, int grad2)
         {
