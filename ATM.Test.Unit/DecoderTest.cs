@@ -46,7 +46,7 @@ namespace ATM.Test.Unit
             fakeListFull.Add(new AircraftData("FLIGHT02", 8002, 40002, 10002, new TimeStamp(2019, 11, 3, 15, 1, 1, 2)));
             fakeListFull.Add(new AircraftData("FLIGHT03", 8003, 40003, 10003, new TimeStamp(2010, 12, 4, 16, 2, 2, 3)));
 
-            holderList = _uut.CloneList(fakeListFull);
+            holderList = _utility.CloneList(fakeListFull);
 
             Assert.That(fakeListEmpty, Is.Not.AnyOf(holderList));
         }
@@ -62,11 +62,10 @@ namespace ATM.Test.Unit
             fakeListFull.Add(new AircraftData("FLIGHT02", 8002, 40002, 10002, new TimeStamp(2019, 11, 3, 15, 1, 1, 2)));
             fakeListFull.Add(new AircraftData("FLIGHT03", 8003, 40003, 10003, new TimeStamp(2010, 12, 4, 16, 2, 2, 3)));
 
-            holderList = _uut.CloneList(fakeListFull);
+            holderList = _utility.CloneList(fakeListFull);
 
             Assert.That(fakeListFull, Is.EqualTo(holderList));
         }
-
 
         [Test]
         public void runSelfTest_DecodeString()
@@ -96,7 +95,6 @@ namespace ATM.Test.Unit
         }
 
         [Test]
-
         public void runSelfTest_InsertSpeedWhereListsAreEqual()
         {
             // After this test, all the new objects should have the speed of the old objects
@@ -177,6 +175,7 @@ namespace ATM.Test.Unit
             Assert.That(_uut._Aircrafts[0].Tag == "ATR423");
             Assert.That(_uut._Aircrafts[1].Tag == "ATR424");
         }
+        
 
     }
 }
