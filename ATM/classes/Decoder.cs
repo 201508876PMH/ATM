@@ -63,8 +63,11 @@ namespace ATM.classes
             }
 
             InsertSpeedAndCourse(_OldAircraftDatas, _Aircrafts);
-
-            DecodedDataReadyEvent(this, new DecodedTransponderDataEventArgs(_Aircrafts));
+            if (DecodedDataReadyEvent !=null)
+            {
+                DecodedDataReadyEvent(this, new DecodedTransponderDataEventArgs(_Aircrafts));
+            }
+            
         }
 
 
