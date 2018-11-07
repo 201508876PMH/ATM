@@ -43,14 +43,32 @@ namespace ATM.classes
 
         public override string ToString()
         {
-            if (string.Format( $"{Math.Round(Coords, 2)} deg").Length < 9)
+            //if (string.Format( $"{Math.Round(Coords, 2)} deg").Length < 9)
+            //{
+            //    return string.Format($"Tag: {Tag}\tX: {X_coordinate}m\tY: {Y_coordinate}m\tAlt: {Altitude}m\t\t" +
+            //                         $"Speed: {Math.Round(Speed, 2)}m/s\t\tCoords: {Math.Round(Coords, 2)}deg\t\t\t{TimeStamp}");
+            //}
+
+            if (Coords < 10 && Speed < 100)
             {
-                return string.Format($"Tag: {Tag}\tX: {X_coordinate}m\tY: {Y_coordinate}m\tAlt: {Altitude}m\t\t" +
-                                     $"Speed: {Math.Round(Speed, 2)}ms\t\tCoords: {Math.Round(Coords, 2)}deg\t\t\t{TimeStamp}");
+                return string.Format($"Tag: {Tag}\tX: {X_coordinate}m\tY: {Y_coordinate}m\tAlt: {Altitude}m\t" +
+                                     $"Speed: {Speed.ToString("N2")}m/s\t\tCoords: {Coords.ToString("N2")}deg\t\t{TimeStamp}");
             }
 
-            return string.Format($"Tag: {Tag}\tX: {X_coordinate}m\tY: {Y_coordinate}m\tAlt: {Altitude}m\t\t" +
-                                 $"Speed: {Math.Round(Speed, 2)}ms\t\tCoords: {Math.Round(Coords, 2)}deg\t\t{TimeStamp}");
+            if (Speed < 100)
+            {
+                return string.Format($"Tag: {Tag}\tX: {X_coordinate}m\tY: {Y_coordinate}m\tAlt: {Altitude}m\t" +
+                                     $"Speed: {Speed.ToString("N2")}m/s\t\tCoords: {Coords.ToString("N2")}deg\t{TimeStamp}");
+            }
+
+            if (Coords < 10)
+            {
+                return string.Format($"Tag: {Tag}\tX: {X_coordinate}m\tY: {Y_coordinate}m\tAlt: {Altitude}m\t" +
+                                     $"Speed: {Speed.ToString("N2")}m/s\tCoords: {Coords.ToString("N2")}deg\t\t{TimeStamp}");
+            }
+
+            return string.Format($"Tag: {Tag}\tX: {X_coordinate}m\tY: {Y_coordinate}m\tAlt: {Altitude}m\t" +
+                                 $"Speed: {Speed.ToString("N2")}m/s\tCoords: {Coords.ToString("N2")}deg\t{TimeStamp}");
         }
     }
 }

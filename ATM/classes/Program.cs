@@ -24,23 +24,10 @@ namespace ATM
 
             IConsoleOutPutter consoleOutPutter = new ConsoleOutPutter(analyser);
 
-
-       
-            /*
-            ITransponderReceiver receiver = TransponderReceiverFactory.CreateTransponderDataReceiver();
-            IAnalyser analyser = new Analyser(new Utility(), new Log());
-            //IDecoder decoder = new classes.Decoder(new Utility());
-
-            // Dependency injection with the real TDR
-            TransponderReceiverClient system = new TransponderReceiverClient(receiver, analyser, decoder);
-
-            // Let the real TDR execute in the background
-            
-             */
+            ILog log = new Log(analyser);
             
             while (true)
                 Thread.Sleep(1000);
-
         }
     }
 }

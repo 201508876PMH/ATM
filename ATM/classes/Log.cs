@@ -4,20 +4,30 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ATM.EventArgsClasses;
 using ATM.interfaces;
 
 namespace ATM.classes
 {
     public class Log : ILog
     {
-        private StreamWriter _stream;
+        private IAnalyser _analyser;
 
-        public Log()
+        public Log(IAnalyser analyser)
         {
+            _analyser = analyser;
+
+            _analyser.SeparationEvent += LogOnSeparationEvent;
+
             var fd = File.Create("log.txt");
             fd.Close();
 
             File.AppendAllText(@"log.txt", $"Seperation events log: " + Environment.NewLine + Environment.NewLine);
+        }
+
+        public void LogOnSeparationEvent(object o, SeparationAircraftsData data)
+        {
+            LogSeperationEvent(data.FirstAircraft, data.SecondAircraft);
         }
 
         public void LogSeperationEvent(AircraftData a1, AircraftData a2)
