@@ -106,9 +106,6 @@ namespace ATM.Test.Unit
             fakeListFull.Add(new AircraftData("FLIGHT02", 8002, 40002, 10002, new TimeStamp(2019, 11, 3, 15, 1, 1, 2)));
             fakeListFull.Add(new AircraftData("FLIGHT03", 8003, 40003, 10003, new TimeStamp(2010, 12, 4, 16, 2, 2, 3)));
 
-
-
-
             holderList = _uut.CloneList(fakeListFull);
             
             for (int i = 0; i < holderList.Count; i++)
