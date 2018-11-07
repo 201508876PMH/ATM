@@ -29,7 +29,7 @@ namespace ATM.classes
 
         public override string ToString()
         {
-            return string.Format($"Date: {day}-{month}-{year}\tTime: {hour}:{min}:{sec}:{ms}");
+            return string.Format($"Date: {day}-{month}-{year}\t\tTime: {hour}:{min}:{sec}:{ms.ToString("000")}");
         }
     }
 }
