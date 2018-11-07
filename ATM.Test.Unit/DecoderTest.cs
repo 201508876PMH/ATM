@@ -17,7 +17,7 @@ namespace ATM.Test.Unit
     {
         private Decoder _uut;
         private IUtility _utility = new Utility();
-        private AircraftData _aircraftDataEquals;
+        //private AircraftData _aircraftDataEquals;
         private ITransponderReceiver _reciever;
 
         [SetUp]

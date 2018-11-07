@@ -12,7 +12,6 @@ namespace ATM.classes
     public class Log : ILog
     {
         private IAnalyser _analyser;
-        private StreamWriter _stream;
 
         public Log(IAnalyser analyser)
         {
