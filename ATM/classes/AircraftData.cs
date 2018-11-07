@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ATM.classes
 {
-    public class AircraftData : EventArgs
+    public class AircraftData : EventArgs, IEquatable<AircraftData>
     {
         public AircraftData(string tag, int x_coordinate, int y_coordinate, int altitude, TimeStamp timeStamp)
         {
@@ -24,6 +24,23 @@ namespace ATM.classes
         public TimeStamp TimeStamp { get; set; }
         public double Speed { get; set; }
         public double Coords { get; set; }
+
+        /* This method is explicitly created for unittesting Decoder cloneListSuccedes method */
+        public bool Equals(AircraftData other)
+        {
+            if (this.Tag == other.Tag && this.Altitude == other.Altitude
+                                      && this.Coords == other.Coords
+                                      && this.Speed == other.Speed
+                                      && this.TimeStamp == other.TimeStamp
+                                      && this.X_coordinate == other.X_coordinate
+                                      && this.Y_coordinate == other.Y_coordinate)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
         public override string ToString()
         {
             return string.Format($"Tag: {Tag}\tX: {X_coordinate}m\tY: {Y_coordinate}m\tAlt: {Altitude}m\t\t" +
