@@ -45,9 +45,7 @@ namespace ATM.classes
         public void OutPutAircraftsWithinArea(List<AircraftData> aircraftData)
         {
             ClearConsole();
-            
             Console.WriteLine($"Received transponder data, count : {ticks}");
-
             
             if (!SeparationTasks.IsNullOrEmpty())
             {
@@ -61,7 +59,6 @@ namespace ATM.classes
             }
             SeparationTasks.Clear();
             Console.ResetColor();
-
             
             if (!TrackEnteredAirSpaceTasks.IsNullOrEmpty())
             {

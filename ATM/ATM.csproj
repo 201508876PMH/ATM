@@ -70,7 +70,6 @@
     <Compile Include="classes\Log.cs" />
     <Compile Include="classes\Program.cs" />
     <Compile Include="classes\TimeStamp.cs" />
-    <Compile Include="classes\TransponderReceiverClient.cs" />
     <Compile Include="classes\Utility.cs" />
     <Compile Include="EventArgsClasses\AnalysedTransponderDataEventArgs.cs" />
     <Compile Include="EventArgsClasses\DecodedTransponderDataEventArgs.cs" />
