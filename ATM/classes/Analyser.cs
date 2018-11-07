@@ -15,7 +15,7 @@ namespace ATM.classes
         //private ILog _log;
 
         public List<AircraftData> _FilteredAircrafts { get; set; }
-        public List<AircraftData> _OldFilteredAircrafts { get; set; }
+        public List<AircraftData> _OldFilteredAircrafts { get; set; } = new List<AircraftData>();
 
         /* Our [Analyser]eventhandler for hooking to the [Decoder]eventhandler */
         public event EventHandler<AnalysedTransponderDataEventArgs> AnalysedDataReadyEvent;
@@ -27,6 +27,7 @@ namespace ATM.classes
         public Analyser(IUtility utility, IDecoder decoder)
         {
             _FilteredAircrafts = new List<AircraftData>();
+            //_OldFilteredAircrafts = new List<AircraftData>();
             _utility = utility;
 
             /* Here we hook our [Analyser]eventHandler to the AnalyserOfTransponderDataEventArgs method */
