@@ -23,7 +23,8 @@ namespace ATM.Test.Unit
 
         [SetUp]
         public void setUp()
-        {
+        { 
+
             /*
              * We dont create a mock of our Decoder class, as it is the class from which we test from
              */
