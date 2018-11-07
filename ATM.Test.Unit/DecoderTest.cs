@@ -17,16 +17,11 @@ namespace ATM.Test.Unit
     {
         private Decoder _uut;
         private IUtility _utility = new Utility();
-        //private AircraftData _aircraftDataEquals;
         private ITransponderReceiver _reciever;
 
         [SetUp]
         public void setUp()
         {
-            /*
-             * We dont create a mock of our Decoder class, as it is the class from which we test from
-             */
-
             //if we test multiple classes in conjunction, we add mocks here:
             
             //_utility = Substitute.For<IUtility>();
