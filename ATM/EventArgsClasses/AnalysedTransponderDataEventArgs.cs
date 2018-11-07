@@ -16,6 +16,6 @@ namespace ATM.EventArgsClasses
             _AircraftData = _localList;
         }
 
-        public List<AircraftData> _AircraftData {get; set; }
+        public List<AircraftData> _AircraftData {get; set;}
     }
 }

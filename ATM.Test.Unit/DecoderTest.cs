@@ -37,7 +37,6 @@ namespace ATM.Test.Unit
             _uut = new Decoder(_reciever, _utility);
 
             _uut.DecodedDataReadyEvent += (o, args) => { numberOfEventTriggered++; };
-
         }
 
 
@@ -50,14 +49,12 @@ namespace ATM.Test.Unit
 
             holder = _uut.DecodeString(stringToDecode);
             holder.Coords = 342.0;
-
-
+            
             Assert.That(holder.Tag == "ATR423");
             Assert.That(holder.X_coordinate == int.Parse("39045"));
             Assert.That(holder.Y_coordinate == int.Parse("12932"));
             Assert.That(holder.Altitude == int.Parse("14000"));
-
-
+            
             Assert.That(holder.TimeStamp.ms == 789);
             Assert.That(holder.TimeStamp.sec == 56);
             Assert.That(holder.TimeStamp.min == 34);
@@ -173,7 +170,6 @@ namespace ATM.Test.Unit
 
             Assert.That(newFakeList[0].Speed == 5 && newFakeList[0].Coords == 300);
             Assert.That(newFakeList[1].Speed == 5 && newFakeList[1].Coords == 300);
-
         }
 
         [Test]
@@ -199,14 +195,13 @@ namespace ATM.Test.Unit
             _utility.Speed(aircraftDataNew3, aircraftDataNew2).ReturnsForAnyArgs(5);
             _utility.CalculateDegree(aircraftDataNew2, aircraftDataNew2).ReturnsForAnyArgs(300);
 
-            _uut.UpdateTransponderData(listOfStrings);
+            //_uut.UpdateTransponderData(listOfStrings);
+            _reciever.TransponderDataReady += Raise.EventWith(new RawTransponderDataEventArgs(listOfStrings));
+            
             Assert.AreEqual(numberOfEventTriggered, 1);
 
             Assert.That(_uut._Aircrafts[0].Tag == "ATR423" && _uut._Aircrafts[0].Speed == 5 && _uut._Aircrafts[0].Coords == 300);
             Assert.That(_uut._Aircrafts[1].Tag == "ATR424" && _uut._Aircrafts[0].Speed == 5 && _uut._Aircrafts[0].Coords == 300);
         }
-
-
-
     }
 }
