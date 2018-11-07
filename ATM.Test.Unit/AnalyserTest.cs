@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ATM.classes;
+using ATM.EventArgsClasses;
 using ATM.interfaces;
 using Castle.Core.Internal;
 using NUnit.Framework;
@@ -16,18 +17,39 @@ namespace ATM.Test.Unit
     {
         private Analyser _uut;
         private IUtility _utility;
-        //private ILog _log;
         private IDecoder _decoder;
 
+        private int _nSeparationEventsRaised = 0;
+        private int _nAnalysedDataReadyEventsRaised = 0;
+        private int _nTrackEnteredAirspaceEventsRaised = 0;
+        private int _nTrackLeftAirspaceEventsRaised = 0;
 
         [SetUp]
         public void Setup()
         {
             _utility = Substitute.For<IUtility>();
-            //_log = Substitute.For<ILog>();
-            _decoder = Substitute.For<classes.Decoder>();
+            _decoder = Substitute.For<IDecoder>();
             _uut = new Analyser(_utility, _decoder);
+            
+            _uut.SeparationEvent += (o, args) =>
+            {
+                ++_nSeparationEventsRaised;
+            };
 
+            _uut.AnalysedDataReadyEvent += (o, args) =>
+            {
+                ++_nAnalysedDataReadyEventsRaised;
+            };
+
+            _uut.TrackEnteredAirSpaceEvent += (o, args) =>
+            {
+                ++_nTrackEnteredAirspaceEventsRaised;
+            };
+
+            _uut.TrackLeftAirSpaceEvent += (o, args) =>
+            {
+                ++_nTrackLeftAirspaceEventsRaised;
+            };
         }
 
         [Test]
@@ -65,12 +87,14 @@ namespace ATM.Test.Unit
         {
             List<AircraftData> FakeAircrafts = new List<AircraftData>();
 
-            AircraftData a1 = new AircraftData("Plane1", 40000, 40000, 10000, null);
-            AircraftData a2 = new AircraftData("Plane2", 10000, 10000, 11000, null);
-            AircraftData a3 = new AircraftData("Plane3", 70000, 70000, 7000, null);
-            AircraftData a4 = new AircraftData("Plane4", 20000, 20000, 12000, null);
-            AircraftData a5 = new AircraftData("Plane5", 75000, 75000, 7300, null);
-            AircraftData a6 = new AircraftData("Plane6", 30000, 30000, 9000, null);
+            TimeStamp ts = new TimeStamp(2018, 10, 2, 14, 0, 0, 0);
+
+            AircraftData a1 = new AircraftData("Plane1", 40000, 40000, 10000, ts);
+            AircraftData a2 = new AircraftData("Plane2", 10000, 10000, 11000, ts);
+            AircraftData a3 = new AircraftData("Plane3", 70000, 70000, 7000, ts);
+            AircraftData a4 = new AircraftData("Plane4", 20000, 20000, 12000, ts);
+            AircraftData a5 = new AircraftData("Plane5", 75000, 75000, 7300, ts);
+            AircraftData a6 = new AircraftData("Plane6", 30000, 30000, 9000, ts);
 
             FakeAircrafts.Add(a1);
             FakeAircrafts.Add(a2);
@@ -79,11 +103,73 @@ namespace ATM.Test.Unit
             FakeAircrafts.Add(a5);
             FakeAircrafts.Add(a6);
 
+            _uut._FilteredAircrafts.Add(a1);
+            _uut._FilteredAircrafts.Add(a2);
+            _uut._FilteredAircrafts.Add(a3);
+            _uut._FilteredAircrafts.Add(a4);
+            _uut._FilteredAircrafts.Add(a5);
+            _uut._FilteredAircrafts.Add(a6);
+
+            List<AircraftData> OldFakeAircrafts = new List<AircraftData>();
+            
+            OldFakeAircrafts.Add(a1);
+            OldFakeAircrafts.Add(a2);
+            OldFakeAircrafts.Add(a3);
+            OldFakeAircrafts.Add(a4);
+            OldFakeAircrafts.Add(a5);
+            OldFakeAircrafts.Add(a6);
+
+            _utility.CloneList(_uut._FilteredAircrafts).Returns(FakeAircrafts);
+
             _utility.CalcDistance(a3, a5).Returns(5000);
 
-            _uut.AnalyseData(FakeAircrafts);
+            //_uut.AnalyseData(FakeAircrafts);
+            _uut.AnalyseEventMethod(_uut, new DecodedTransponderDataEventArgs(FakeAircrafts));
 
-            //_log.Received().LogSeperationEvent(a3, a5);
+            Assert.AreEqual(_nSeparationEventsRaised, 1);
+            Assert.AreEqual(_nAnalysedDataReadyEventsRaised, 1);
+        }
+
+        [Test]
+        public void Test_TrackEnteredAirspaceEvent()
+        {
+            TimeStamp ts = new TimeStamp(2018, 10, 2, 14, 0, 0, 0);
+            AircraftData a1 = new AircraftData("Plane1", 40000, 40000, 10000, ts);
+            AircraftData a2 = new AircraftData("Plane2", 10000, 10000, 11000, ts);
+            AircraftData a3 = new AircraftData("Plane3", 70000, 70000, 7000, ts);
+            AircraftData a4 = new AircraftData("Plane4", 20000, 20000, 12000, ts);
+
+            _uut._OldFilteredAircrafts.Add(a1);
+            _uut._OldFilteredAircrafts.Add(a2);
+
+            _uut._FilteredAircrafts.Add(a1);
+            _uut._FilteredAircrafts.Add(a2);
+            _uut._FilteredAircrafts.Add(a3);
+            _uut._FilteredAircrafts.Add(a4);
+
+            _uut.CheckForTrackEnteredAirspace();
+            Assert.AreEqual(_nTrackEnteredAirspaceEventsRaised, 2);
+        }
+
+        [Test]
+        public void Test_TrackLeftAirspaceEvent()
+        {
+            TimeStamp ts = new TimeStamp(2018, 10, 2, 14, 0, 0, 0);
+            AircraftData a1 = new AircraftData("Plane1", 40000, 40000, 10000, ts);
+            AircraftData a2 = new AircraftData("Plane2", 10000, 10000, 11000, ts);
+            AircraftData a3 = new AircraftData("Plane3", 70000, 70000, 7000, ts);
+            AircraftData a4 = new AircraftData("Plane4", 20000, 20000, 12000, ts);
+
+            _uut._OldFilteredAircrafts.Add(a1);
+            _uut._OldFilteredAircrafts.Add(a2);
+            _uut._OldFilteredAircrafts.Add(a3);
+            _uut._OldFilteredAircrafts.Add(a4);
+
+            _uut._FilteredAircrafts.Add(a2);
+            _uut._FilteredAircrafts.Add(a4);
+
+            _uut.CheckForTrackLeftAirspace();
+            Assert.AreEqual(_nTrackLeftAirspaceEventsRaised, 2);
         }
     }
 }

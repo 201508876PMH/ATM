@@ -13,14 +13,12 @@ namespace ATM.Test.Unit
     {
         private Utility _uut;
 
-
         [SetUp]
         public void SetUp()
         {
             _uut = new Utility();
 
         }
-
 
         [Test]
         [TestCase(10500, 50000, 15000, 35000, 15660)]    // x1     y1     x2    y2    Result Calculated + rounded down
@@ -35,11 +33,7 @@ namespace ATM.Test.Unit
 
             Assert.That(distance == result);
         }
-
-
-
-
-
+        
         [Test]
         [TestCase(23,50,53,600, 85853600)] //82 800 000 + 3 000 000 + 53 000 + 600 == 85853600
         public void CalculateMiliisecTest(int hour, int min, int sec, int ms, int result)
@@ -50,10 +44,7 @@ namespace ATM.Test.Unit
             int millisec = _uut.ConvertTimeToMilliseconds(aircraft);
 
             Assert.That(millisec == result);
-            
         }
-
-
 
         // This function is depend on calculate distance, therefor this test is created after CalculateSpeed
         [Test]
@@ -77,21 +68,14 @@ namespace ATM.Test.Unit
         [TestCase(24900, 25100, 29100, 30000, 90, 180)] // south- West
         [TestCase(25100, 25000, 30000, 29100, 270, 360)] // north- East
         [TestCase(24900, 25100, 30000, 29100, 0, 90)] // Nort-West
-
-
-
         public void CalculateCourse(int xNew, int xOld, int yNew, int yOld, int grad1, int grad2)
         {
-
             AircraftData newAircraftData = new AircraftData("test", xNew,  yNew, 1, new TimeStamp(1, 1, 1, 1, 1, 1, 1));
             AircraftData oldAircraftData = new AircraftData("test", xOld, yOld, 1, new TimeStamp(1, 1, 1, 1, 1, 1, 1));
 
             double grad = _uut.CalculateDegree(newAircraftData, oldAircraftData);
 
             Assert.That(grad >= grad1 && grad <= grad2);
-
-
-
         }
 
 
