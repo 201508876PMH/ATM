@@ -18,26 +18,16 @@ namespace ATM
 
             ITransponderReceiver receiver = TransponderReceiverFactory.CreateTransponderDataReceiver();
 
+            // Decoder will hook the on reciever Event
             IDecoder decoder = new classes.Decoder(receiver, new Utility());
 
+            // Analyser will hook on the DecoderDataReaddyEvent
             IAnalyser analyser = new Analyser(new Utility(), decoder);
 
+            //consoleOutPutter will 
             IConsoleOutPutter consoleOutPutter = new ConsoleOutPutter(analyser);
-
-
-       
-            /*
-            ITransponderReceiver receiver = TransponderReceiverFactory.CreateTransponderDataReceiver();
-            IAnalyser analyser = new Analyser(new Utility(), new Log());
-            //IDecoder decoder = new classes.Decoder(new Utility());
-
-            // Dependency injection with the real TDR
-            TransponderReceiverClient system = new TransponderReceiverClient(receiver, analyser, decoder);
-
-            // Let the real TDR execute in the background
             
-             */
-            
+
             while (true)
                 Thread.Sleep(1000);
 
