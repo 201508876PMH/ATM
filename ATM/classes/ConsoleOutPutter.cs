@@ -71,7 +71,7 @@ namespace ATM.classes
             
             if (!TrackEnteredAirSpaceTasks.IsNullOrEmpty())
             {
-                Console.WriteLine("\nAIRCRAFTS ENTERED THE AIR SPACE:");
+                Console.WriteLine("\nAIRCRAFTS ENTERED AIR SPACE:");
             }
             Console.ForegroundColor = ConsoleColor.Green;
             foreach (var item in TrackEnteredAirSpaceTasks)
@@ -83,7 +83,7 @@ namespace ATM.classes
             
             if (!TrackLeftAirSpaceTasks.IsNullOrEmpty())
             {
-                Console.WriteLine("\nAIRCRAFTS LEFT THE AIR SPACE:");
+                Console.WriteLine("\nAIRCRAFTS LEFT AIR SPACE:");
             }
             Console.ForegroundColor = ConsoleColor.Yellow;
             foreach (var item in TrackLeftAirSpaceTasks)

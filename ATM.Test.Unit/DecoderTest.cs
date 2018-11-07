@@ -16,10 +16,9 @@ namespace ATM.Test.Unit
     public class DecoderTest
     {
         private Decoder _uut;
-        private IUtility _utility;
-        private AircraftData _aircraftDataEquals;
+        private IUtility _utility = new Utility();
+        //private AircraftData _aircraftDataEquals;
         private ITransponderReceiver _reciever;
-        private int numberOfEventTriggered = 0;
 
         [SetUp]
         public void setUp()
@@ -30,14 +29,11 @@ namespace ATM.Test.Unit
 
             //if we test multiple classes in conjunction, we add mocks here:
             
-            _utility = Substitute.For<IUtility>();
+            //_utility = Substitute.For<IUtility>();
             _reciever = Substitute.For<ITransponderReceiver>();
 
             //Constructor injection
             _uut = new Decoder(_reciever, _utility);
-
-            _uut.DecodedDataReadyEvent += (o, args) => { numberOfEventTriggered++; };
-
         }
 
 
@@ -74,37 +70,25 @@ namespace ATM.Test.Unit
         {
             // After this test, all the new objects should have the speed of the old objects
 
-            #region  Initialization For Test
-
-            AircraftData aircraftDataOld1 = new AircraftData("FlIGHT01", 0001, 00001, 00001, new TimeStamp(0001, 01, 1, 1, 1, 1, 1));
-            AircraftData aircraftDataOld2 = new AircraftData("FlIGHT02", 0002, 00002, 00002, new TimeStamp(0002, 02, 2, 2, 2, 2, 2));
-            AircraftData aircraftDataOld3 = new AircraftData("FlIGHT03", 0003, 00003, 00003, new TimeStamp(0003, 03, 3, 3, 3, 3, 3));
-
-            AircraftData aircraftDataNew1 = new AircraftData("FlIGHT01", 0001, 00001, 00001, new TimeStamp(0001, 01, 1, 1, 1, 1, 1));
-            AircraftData aircraftDataNew2 = new AircraftData("FlIGHT02", 0002, 00002, 00002, new TimeStamp(0002, 02, 2, 2, 2, 2, 2));
-            AircraftData aircraftDataNew3 = new AircraftData("FlIGHT03", 0003, 00003, 00003, new TimeStamp(0003, 03, 3, 3, 3, 3, 3));
-
             List<AircraftData> oldFakeList = new List<AircraftData>();
-            oldFakeList.Add(aircraftDataOld1);
-            oldFakeList.Add(aircraftDataOld2);
-            oldFakeList.Add(aircraftDataOld3);
-            
+            oldFakeList.Add(new AircraftData("FlIGHT01", 0001, 00001, 00001, new TimeStamp(0001, 01, 1, 1, 1, 1, 1)));
+            oldFakeList.Add(new AircraftData("FlIGHT02", 0002, 00002, 00002, new TimeStamp(0002, 02, 2, 2, 2, 2, 2)));
+            oldFakeList.Add(new AircraftData("FlIGHT03", 0003, 00003, 00003, new TimeStamp(0003, 03, 3, 3, 3, 3, 3)));
+
             List<AircraftData> newFakeList = new List<AircraftData>();
-            newFakeList.Add(aircraftDataNew1);
-            newFakeList.Add(aircraftDataNew2);
-            newFakeList.Add(aircraftDataNew3);
+            newFakeList.Add(new AircraftData("FlIGHT01", 0000, 00000, 00001, new TimeStamp(0001, 01, 1, 1, 1, 1, 1)));
+            newFakeList.Add(new AircraftData("FlIGHT02", 0000, 00000, 00002, new TimeStamp(0002, 02, 2, 2, 2, 2, 2)));
+            newFakeList.Add(new AircraftData("FlIGHT03", 0000, 00000, 00003, new TimeStamp(0003, 03, 3, 3, 3, 3, 3)));
 
-            #endregion
-
-            _utility.Speed(aircraftDataNew3, aircraftDataNew1).ReturnsForAnyArgs(5);
-            _utility.CalculateDegree(aircraftDataNew1, aircraftDataNew1).ReturnsForAnyArgs(300);
+          
+         
 
             _uut.InsertSpeedAndCourse(oldFakeList, newFakeList);
-            
-            
-            Assert.That(newFakeList[0].Speed == 5 && newFakeList[0].Coords == 300);
-            Assert.That(newFakeList[1].Speed == 5 && newFakeList[1].Coords == 300);
-            Assert.That(newFakeList[2].Speed == 5 && newFakeList[2].Coords == 300);
+
+            Assert.That(newFakeList[0].Speed == oldFakeList[0].Speed);
+            Assert.That(newFakeList[1].Speed == oldFakeList[1].Speed);
+            Assert.That(newFakeList[2].Speed == oldFakeList[2].Speed);
+
         }
 
         [Test]
@@ -112,33 +96,20 @@ namespace ATM.Test.Unit
         {
             // After this test, all the new objects should have the speed of the old objects
 
-            AircraftData aircraftDataOld1 = new AircraftData("FlIGHT01", 0001, 00001, 00001, new TimeStamp(0001, 01, 1, 1, 1, 1, 1));
-            AircraftData aircraftDataOld2 = new AircraftData("FlIGHT02", 0002, 00002, 00002, new TimeStamp(0002, 02, 2, 2, 2, 2, 2));
-            AircraftData aircraftDataOld3 = new AircraftData("FlIGHT03", 0003, 00003, 00003, new TimeStamp(0003, 03, 3, 3, 3, 3, 3));
-
-            AircraftData aircraftDataNew1 = new AircraftData("FlIGHT01", 0001, 00001, 00001, new TimeStamp(0001, 01, 1, 1, 1, 1, 1));
-            AircraftData aircraftDataNew2 = new AircraftData("FlIGHT02", 0002, 00002, 00002, new TimeStamp(0002, 02, 2, 2, 2, 2, 2));
-
-
             List<AircraftData> oldFakeList = new List<AircraftData>();
-            oldFakeList.Add(aircraftDataOld1);
-            oldFakeList.Add(aircraftDataOld2);
-            oldFakeList.Add(aircraftDataOld3);
+            oldFakeList.Add(new AircraftData("FlIGHT01", 0001, 00001, 00001, new TimeStamp(0001, 01, 1, 1, 1, 1, 1)));
+            oldFakeList.Add(new AircraftData("FlIGHT02", 0002, 00002, 00002, new TimeStamp(0002, 02, 2, 2, 2, 2, 2)));
+            oldFakeList.Add(new AircraftData("FlIGHT03", 0003, 00003, 00003, new TimeStamp(0003, 03, 3, 3, 3, 3, 3)));
 
             List<AircraftData> newFakeList = new List<AircraftData>();
-            newFakeList.Add(aircraftDataNew1);
-            newFakeList.Add(aircraftDataNew2);
-
-
-            _utility.Speed(aircraftDataNew1, aircraftDataNew1).ReturnsForAnyArgs(5);
-            _utility.CalculateDegree(aircraftDataNew1, aircraftDataNew1).ReturnsForAnyArgs(300);
+            newFakeList.Add(new AircraftData("FlIGHT01", 0000, 00000, 00001, new TimeStamp(0001, 01, 1, 1, 1, 1, 1)));
+            newFakeList.Add(new AircraftData("FlIGHT02", 0000, 00000, 00002, new TimeStamp(0002, 02, 2, 2, 2, 2, 2)));
 
 
             _uut.InsertSpeedAndCourse(oldFakeList, newFakeList);
-            
 
-            Assert.That(newFakeList[0].Speed  == 5 && newFakeList[0].Coords == 300);
-            Assert.That(newFakeList[1].Speed == 5 && newFakeList[1].Coords == 300);
+            Assert.That(newFakeList[0].Speed == oldFakeList[0].Speed);
+            Assert.That(newFakeList[1].Speed == oldFakeList[1].Speed);
 
         }
 
@@ -147,33 +118,21 @@ namespace ATM.Test.Unit
         {
             // After this test, all the new objects should have the speed of the old objects
 
-            AircraftData aircraftDataOld1 = new AircraftData("FlIGHT01", 0001, 00001, 00001, new TimeStamp(0001, 01, 1, 1, 1, 1, 1));
-            AircraftData aircraftDataOld2 = new AircraftData("FlIGHT02", 0002, 00002, 00002, new TimeStamp(0002, 02, 2, 2, 2, 2, 2));
-            
-            AircraftData aircraftDataNew1 = new AircraftData("FlIGHT01", 0001, 00001, 00001, new TimeStamp(0001, 01, 1, 1, 1, 1, 1));
-            AircraftData aircraftDataNew2 = new AircraftData("FlIGHT02", 0002, 00002, 00002, new TimeStamp(0002, 02, 2, 2, 2, 2, 2));
-            AircraftData aircraftDataNew3 = new AircraftData("FlIGHT03", 0003, 00003, 00003, new TimeStamp(0003, 03, 3, 3, 3, 3, 3));
-
-
             List<AircraftData> oldFakeList = new List<AircraftData>();
-            oldFakeList.Add(aircraftDataOld1);
-            oldFakeList.Add(aircraftDataOld2);
-            
+            oldFakeList.Add(new AircraftData("FlIGHT01", 0001, 00001, 00001, new TimeStamp(0001, 01, 1, 1, 1, 1, 1)));
+            oldFakeList.Add(new AircraftData("FlIGHT02", 0002, 00002, 00002, new TimeStamp(0002, 02, 2, 2, 2, 2, 2)));
+
 
             List<AircraftData> newFakeList = new List<AircraftData>();
-            newFakeList.Add(aircraftDataNew1);
-            newFakeList.Add(aircraftDataNew2);
-            newFakeList.Add(aircraftDataNew3);
-
-            _utility.Speed(aircraftDataNew3, aircraftDataNew1).ReturnsForAnyArgs(5);
-            _utility.CalculateDegree(aircraftDataNew1, aircraftDataNew1).ReturnsForAnyArgs(300);
+            newFakeList.Add(new AircraftData("FlIGHT01", 0000, 00000, 00001, new TimeStamp(0001, 01, 1, 1, 1, 1, 1)));
+            newFakeList.Add(new AircraftData("FlIGHT02", 0000, 00000, 00002, new TimeStamp(0002, 02, 2, 2, 2, 2, 2)));
+            newFakeList.Add(new AircraftData("FlIGHT03", 0000, 00000, 00003, new TimeStamp(0003, 03, 3, 3, 3, 3, 3)));
 
             _uut.InsertSpeedAndCourse(oldFakeList, newFakeList);
 
+            Assert.That(newFakeList[0].Speed == oldFakeList[0].Speed);
+            Assert.That(newFakeList[1].Speed == oldFakeList[1].Speed);
 
-            Assert.That(newFakeList[0].Speed == 5 && newFakeList[0].Coords == 300);
-            Assert.That(newFakeList[1].Speed == 5 && newFakeList[1].Coords == 300);
-           
         }
 
         [Test]
@@ -185,25 +144,11 @@ namespace ATM.Test.Unit
 
             listOfStrings.Add(testerString);
             listOfStrings.Add(testerString1);
-            //  Decodes into list = _AirCraft
 
-            // Explit Old data from last tick
-            AircraftData aircraftDataNew2 = new AircraftData("FlIGHT02", 0002, 00002, 00002, new TimeStamp(0002, 02, 2, 2, 2, 2, 2));
-            AircraftData aircraftDataNew3 = new AircraftData("FlIGHT03", 0003, 00003, 00003, new TimeStamp(0003, 03, 3, 3, 3, 3, 3));
-
-            List<AircraftData> toMock = new List<AircraftData>();
-            toMock.Add(aircraftDataNew3);
-            toMock.Add(aircraftDataNew2);
-
-            _utility.CloneList(toMock).ReturnsForAnyArgs(toMock);
-            _utility.Speed(aircraftDataNew3, aircraftDataNew2).ReturnsForAnyArgs(5);
-            _utility.CalculateDegree(aircraftDataNew2, aircraftDataNew2).ReturnsForAnyArgs(300);
-            
             _uut.UpdateTransponderData(listOfStrings);
-            Assert.AreEqual(numberOfEventTriggered, 1);
 
-            Assert.That(_uut._Aircrafts[0].Tag == "ATR423" && _uut._Aircrafts[0].Speed == 5 && _uut._Aircrafts[0].Coords == 300);
-            Assert.That(_uut._Aircrafts[1].Tag == "ATR424" && _uut._Aircrafts[0].Speed == 5 && _uut._Aircrafts[0].Coords == 300);
+            Assert.That(_uut._Aircrafts[0].Tag == "ATR423");
+            Assert.That(_uut._Aircrafts[1].Tag == "ATR424");
         }
 
 

@@ -18,19 +18,16 @@ namespace ATM
 
             ITransponderReceiver receiver = TransponderReceiverFactory.CreateTransponderDataReceiver();
 
-            // Decoder will hook the on reciever Event
             IDecoder decoder = new classes.Decoder(receiver, new Utility());
 
-            // Analyser will hook on the DecoderDataReaddyEvent
             IAnalyser analyser = new Analyser(new Utility(), decoder);
 
-            //consoleOutPutter will 
             IConsoleOutPutter consoleOutPutter = new ConsoleOutPutter(analyser);
-            
 
+            ILog log = new Log(analyser);
+            
             while (true)
                 Thread.Sleep(1000);
-
         }
     }
 }
