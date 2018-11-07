@@ -59,8 +59,11 @@ namespace ATM.classes
                 }
             }
             
+            // this calculation works for at Compas that are Anti-Clockwise
 
-            return angel;
+            // We can flip this by doing : 360-angle
+        
+            return 360-angel;
 
 
         }

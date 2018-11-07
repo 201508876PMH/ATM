@@ -43,6 +43,12 @@ namespace ATM.classes
 
         public override string ToString()
         {
+            if (string.Format( $"{Math.Round(Coords, 2)} deg").Length < 9)
+            {
+                return string.Format($"Tag: {Tag}\tX: {X_coordinate}m\tY: {Y_coordinate}m\tAlt: {Altitude}m\t\t" +
+                                     $"Speed: {Math.Round(Speed, 2)}ms\t\tCoords: {Math.Round(Coords, 2)}deg\t\t\t{TimeStamp}");
+            }
+
             return string.Format($"Tag: {Tag}\tX: {X_coordinate}m\tY: {Y_coordinate}m\tAlt: {Altitude}m\t\t" +
                                  $"Speed: {Math.Round(Speed, 2)}ms\t\tCoords: {Math.Round(Coords, 2)}deg\t\t{TimeStamp}");
         }

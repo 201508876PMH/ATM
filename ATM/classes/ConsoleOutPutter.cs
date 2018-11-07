@@ -17,6 +17,13 @@ namespace ATM.classes
         public static int ticks = 0;
         public IAnalyser _Analyser { get; set; }
 
+        
+        // Many Threads can access these
+        // Therefore it is nessasary to lock when when add or remove
+        private object enterLock = new object();
+        private object ExitLock = new object();
+
+
         List<SeparationAircraftsData> SeparationTasks = new List<SeparationAircraftsData>();
         List<AircraftData> TrackEnteredAirSpaceTasks = new List<AircraftData>();
         List<AircraftData> TrackLeftAirSpaceTasks = new List<AircraftData>();
@@ -44,6 +51,7 @@ namespace ATM.classes
 
         public void OutPutAircraftsWithinArea(List<AircraftData> aircraftData)
         {
+            Console.CursorVisible = false;
             ClearConsole();
             Console.WriteLine($"Received transponder data, count : {ticks}");
             
@@ -97,6 +105,9 @@ namespace ATM.classes
             }
 
             ticks++;
+            Console.SetCursorPosition(0,0);
+
+
         }
 
         public void OutputSeparationTasks(object o, SeparationAircraftsData sepTracks)
@@ -108,9 +119,18 @@ namespace ATM.classes
         {
             Thread t1 = new Thread(new ThreadStart(() =>
             {
-                TrackEnteredAirSpaceTasks.Add(track);
+                lock (enterLock)
+                {
+                    TrackEnteredAirSpaceTasks.Add(track);
+                }
+
                 Thread.Sleep(5000);
-                TrackEnteredAirSpaceTasks.Remove(track);
+
+                lock (enterLock)
+                {
+                    TrackEnteredAirSpaceTasks.Remove(track);
+                }
+                
             } ));
 
             t1.Start();
@@ -120,9 +140,17 @@ namespace ATM.classes
         {
             Thread t1 = new Thread(new ThreadStart(() =>
             {
-                TrackLeftAirSpaceTasks.Add(track);
+                lock (ExitLock)
+                {
+                    TrackLeftAirSpaceTasks.Add(track);
+                }
+
                 Thread.Sleep(5000);
-                TrackLeftAirSpaceTasks.Remove(track);
+
+                lock (ExitLock)
+                {
+                    TrackLeftAirSpaceTasks.Remove(track);
+                }
             }));
 
             t1.Start();
