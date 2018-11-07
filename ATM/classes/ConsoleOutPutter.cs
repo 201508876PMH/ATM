@@ -60,7 +60,6 @@ namespace ATM.classes
                 Console.WriteLine("\nSEPARATION EVENTS:");
             }
             Console.ForegroundColor = ConsoleColor.Red;
-
             foreach (var item in SeparationTasks)
             {
                 Console.WriteLine($"WARNING! Possible collision between flight {item.FirstAircraft.Tag} " +
@@ -92,6 +91,12 @@ namespace ATM.classes
             }
 
             Console.ResetColor();
+
+
+            //Console.ForegroundColor = ConsoleColor.Red;
+            //Console.WriteLine($"WARNING! Possible collision between flight {_FilteredAircrafts[i].Tag} " +
+            //                  $"and {_FilteredAircrafts[j].Tag}.");
+            //Console.ResetColor();
 
             Console.WriteLine("\nAIRCRAFTS INSIDE AIR SPACE:");
             foreach (var item in aircraftData)
@@ -150,6 +155,7 @@ namespace ATM.classes
 
             t1.Start();
         }
+
         
     }
 }

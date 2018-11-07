@@ -35,6 +35,18 @@ namespace ATM.classes
             UpdateTransponderData(e.TransponderData);
         }
 
+        //public Decoder(IUtility utility)
+        //{
+        //    _Aircrafts = new List<AircraftData>();
+        //    _OldAircraftDatas = new List<AircraftData>();
+        //    _utility = utility;
+        //}
+
+
+        // We create two lists, reasoned that when calculating flight speed,
+        // we need the distance the flight has traveled from the previous to current location
+
+            
 
 
         // A method for updating our lists, both old and new
@@ -51,12 +63,10 @@ namespace ATM.classes
             }
 
             InsertSpeedAndCourse(_OldAircraftDatas, _Aircrafts);
-
-            if (DecodedDataReadyEvent != null)
+            if (DecodedDataReadyEvent !=null)
             {
                 DecodedDataReadyEvent(this, new DecodedTransponderDataEventArgs(_Aircrafts));
             }
-
             
         }
 
