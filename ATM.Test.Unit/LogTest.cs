@@ -39,8 +39,8 @@ namespace ATM.Test.Unit
             {
                 string contents = sr.ReadToEnd();
 
-                Assert.IsTrue(contents.Contains("ZRK564"));
-                Assert.IsTrue(contents.Contains("BRR594"));
+                Assert.IsTrue(contents.Contains("ZRK564 and BRR594"));
+                //Assert.IsTrue(contents.Contains("BRR594"));
             }
         }
     }
