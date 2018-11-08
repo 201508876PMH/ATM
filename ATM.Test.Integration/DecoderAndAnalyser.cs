@@ -69,6 +69,11 @@ namespace ATM.Test.Unit.IntegrationTests
         [Test]
         public void TestSeparationEventRaised()
         {
+            _nSeparationEventsRaised = 0;
+            _nAnalysedDataReadyEventsRaised = 0;
+            _nTrackEnteredAirspaceEventsRaised = 0;
+            _nTrackLeftAirspaceEventsRaised = 0;
+
             // SetUp Event
             string testerString  = "ATR423;30000;31111;14000;20151006213456789";
             string testerString1 = "ATR424;31111;30000;14100;20151006213456789";
@@ -104,7 +109,10 @@ namespace ATM.Test.Unit.IntegrationTests
         [Test]
         public void TestEnterEventRaised()
         {
-
+            _nSeparationEventsRaised = 0;
+            _nAnalysedDataReadyEventsRaised = 0;
+            _nTrackEnteredAirspaceEventsRaised = 0;
+            _nTrackLeftAirspaceEventsRaised = 0;
             // SetUp
             string testerString = "ATR423;30000;31111;14000;20151006213456789";
             List<string> fakeEventList = new List<string>();
@@ -131,6 +139,10 @@ namespace ATM.Test.Unit.IntegrationTests
         [Test]
         public void TestExitEventRaisedAndAnalysedDataReaddy()
         {
+            _nSeparationEventsRaised = 0;
+            _nAnalysedDataReadyEventsRaised = 0;
+            _nTrackEnteredAirspaceEventsRaised = 0;
+            _nTrackLeftAirspaceEventsRaised = 0;
             // SetUp
             string testerString = "ATR423;30000;31111;14000;20151006213456789";
             string testerString2 = "ATR424;30000;31111;14000;20151006213456789";
