@@ -64,7 +64,8 @@ namespace ATM.Test.Unit
             FakeAircrafts.Add(new AircraftData("XRM294", 1000, 95000, 300, new TimeStamp(2018, 10, 2, 14, 0, 0, 0)));
             FakeAircrafts.Add(new AircraftData("TEE666", 10000, 90000, 500, new TimeStamp(2018, 10, 2, 14, 0, 0, 0)));
 
-            _uut.FilterAircrafts(FakeAircrafts);
+            _uut.FilterAircrafts(
+                );
 
             Assert.That(_uut._FilteredAircrafts[0].Tag == "TEE666" && _uut._FilteredAircrafts.Count() == 1);
         }
@@ -124,7 +125,11 @@ namespace ATM.Test.Unit
             _utility.CalcDistance(a3, a5).Returns(5000);
 
             //_uut.AnalyseData(FakeAircrafts);
-            _uut.AnalyseEventMethod(_uut, new DecodedTransponderDataEventArgs(FakeAircrafts));
+
+            _decoder.DecodedDataReadyEvent +=
+                Raise.EventWith(_decoder, new DecodedTransponderDataEventArgs(FakeAircrafts));
+
+            //_uut.AnalyseEventMethod(_uut, new DecodedTransponderDataEventArgs(FakeAircrafts));
 
             Assert.AreEqual(_nSeparationEventsRaised, 1);
             Assert.AreEqual(_nAnalysedDataReadyEventsRaised, 1);
