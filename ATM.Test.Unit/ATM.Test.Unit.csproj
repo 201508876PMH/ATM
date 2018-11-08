@@ -62,6 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AnalyserTest.cs" />
+    <Compile Include="IntegrationTests\DecoderAnalyserLog.cs" />
     <Compile Include="IntegrationTests\DecoderAndAnalyser.cs" />
     <Compile Include="LogTest.cs" />
     <Compile Include="DecoderTest.cs" />
