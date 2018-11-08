@@ -14,6 +14,8 @@ namespace ATM.classes
         private IUtility _utility;
         private ITransponderReceiver _receiver;
 
+        // We create two lists, reasoned that when calculating flight speed,
+        // we need the distance the flight has traveled from the previous to current location
         public List<AircraftData> _Aircrafts { get; set; } = new List<AircraftData>();
         public List<AircraftData> _OldAircraftDatas { get; set; } = new List<AircraftData>();
 
@@ -35,20 +37,7 @@ namespace ATM.classes
             UpdateTransponderData(e.TransponderData);
         }
 
-        //public Decoder(IUtility utility)
-        //{
-        //    _Aircrafts = new List<AircraftData>();
-        //    _OldAircraftDatas = new List<AircraftData>();
-        //    _utility = utility;
-        //}
-
-
-        // We create two lists, reasoned that when calculating flight speed,
-        // we need the distance the flight has traveled from the previous to current location
-
-            
-
-
+        
         // A method for updating our lists, both old and new
         // We first clone the objects from TrasnponderData to a 'old' list
         public void UpdateTransponderData(List<string> _TransponderData)

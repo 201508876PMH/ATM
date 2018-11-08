@@ -85,13 +85,6 @@ namespace ATM.classes
                     if (CheckForCollision(_FilteredAircrafts[i], _FilteredAircrafts[j]) == true)
                     {
                         SeparationEvent(this, new SeparationAircraftsData(_FilteredAircrafts[i], _FilteredAircrafts[j]));
-
-                        //Console.ForegroundColor = ConsoleColor.Red;
-                        //Console.WriteLine($"WARNING! Possible collision between flight {_FilteredAircrafts[i].Tag} " +
-                        //                  $"and {_FilteredAircrafts[j].Tag}.");
-                        //Console.ResetColor();
-
-                        //_log.LogSeperationEvent(_FilteredAircrafts[i], _FilteredAircrafts[j]);
                     }
                 }
             }
