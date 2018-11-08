@@ -128,6 +128,7 @@ namespace ATM.classes
 
                 lock (enterLock)
                 {
+
                     TrackEnteredAirSpaceTasks.Remove(track);
                 }
                 
