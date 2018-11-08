@@ -125,7 +125,11 @@ namespace ATM.Test.Unit
             _utility.CalcDistance(a3, a5).Returns(5000);
 
             //_uut.AnalyseData(FakeAircrafts);
-            _uut.AnalyseEventMethod(_uut, new DecodedTransponderDataEventArgs(FakeAircrafts));
+
+            _decoder.DecodedDataReadyEvent +=
+                Raise.EventWith(_decoder, new DecodedTransponderDataEventArgs(FakeAircrafts));
+
+            //_uut.AnalyseEventMethod(_uut, new DecodedTransponderDataEventArgs(FakeAircrafts));
 
             Assert.AreEqual(_nSeparationEventsRaised, 1);
             Assert.AreEqual(_nAnalysedDataReadyEventsRaised, 1);
