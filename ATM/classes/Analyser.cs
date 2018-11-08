@@ -44,6 +44,7 @@ namespace ATM.classes
 
         public void FilterAircrafts(List<AircraftData> _list)
         {
+
             _OldFilteredAircrafts = _utility.CloneList(_FilteredAircrafts);
 
             _FilteredAircrafts.Clear();
@@ -84,12 +85,23 @@ namespace ATM.classes
                 {
                     if (CheckForCollision(_FilteredAircrafts[i], _FilteredAircrafts[j]) == true)
                     {
-                        SeparationEvent(this, new SeparationAircraftsData(_FilteredAircrafts[i], _FilteredAircrafts[j]));
+                        // If no subscribers are available, dont raise this event
+                        if (SeparationEvent != null)
+                        {
+                            SeparationEvent(this, new SeparationAircraftsData(_FilteredAircrafts[i], _FilteredAircrafts[j]));
+                        }
+                        
+
                     }
                 }
             }
             /* We remember to raise an event for the next class, that wants to hook */
-            AnalysedDataReadyEvent(this, new AnalysedTransponderDataEventArgs(_FilteredAircrafts));
+            // If no subscribers are available, dont raise this event
+            if (AnalysedDataReadyEvent != null)
+            {
+                AnalysedDataReadyEvent(this, new AnalysedTransponderDataEventArgs(_FilteredAircrafts));
+            }
+            
         }
 
 
@@ -100,8 +112,13 @@ namespace ATM.classes
             {
                 if (CheckIfTrackIsNewInAirspace(item))
                 {
-                    //raise track entered airspace event
-                    TrackEnteredAirSpaceEvent(this, item);
+                    // raise track entered airspace event
+                    // If no subscribers are available, dont raise this event
+                    if (TrackEnteredAirSpaceEvent != null)
+                    {
+                        TrackEnteredAirSpaceEvent(this, item);
+                    }
+                    
                 }
             }
         }
@@ -124,8 +141,13 @@ namespace ATM.classes
             {
                 if (CheckIfTrackIsGoneFromAirspace(item))
                 {
-                    //raise event
-                    TrackLeftAirSpaceEvent(this, item);
+                    // raise event
+                    // If no subscribers are available, dont raise this event
+                    if (TrackLeftAirSpaceEvent != null)
+                    {
+                        TrackLeftAirSpaceEvent(this, item);
+                    }
+                    
                 }
             }
         }
