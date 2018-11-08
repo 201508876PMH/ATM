@@ -44,6 +44,7 @@ namespace ATM.classes
 
         public void FilterAircrafts(List<AircraftData> _list)
         {
+
             _OldFilteredAircrafts = _utility.CloneList(_FilteredAircrafts);
 
             _FilteredAircrafts.Clear();

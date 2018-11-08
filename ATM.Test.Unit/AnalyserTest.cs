@@ -64,7 +64,8 @@ namespace ATM.Test.Unit
             FakeAircrafts.Add(new AircraftData("XRM294", 1000, 95000, 300, new TimeStamp(2018, 10, 2, 14, 0, 0, 0)));
             FakeAircrafts.Add(new AircraftData("TEE666", 10000, 90000, 500, new TimeStamp(2018, 10, 2, 14, 0, 0, 0)));
 
-            _uut.FilterAircrafts(FakeAircrafts);
+            _uut.FilterAircrafts(
+                );
 
             Assert.That(_uut._FilteredAircrafts[0].Tag == "TEE666" && _uut._FilteredAircrafts.Count() == 1);
         }
