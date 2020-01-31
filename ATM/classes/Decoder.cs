@@ -9,7 +9,7 @@ using TransponderReceiver;
 
 namespace ATM.classes
 {
-    public class Decoder : IDecoder
+    public class Decoder : IDeecoder
     {
         private IUtility _utility;
         private ITransponderReceiver _receiver;
